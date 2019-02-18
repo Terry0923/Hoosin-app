@@ -26,6 +26,8 @@ SECRET_KEY = 'rjabi8oph6=ur^_wz2rnjki%i-u-hq%+=*20%yuf_at_!jc(l1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
 ALLOWED_HOSTS = []
 
 
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
