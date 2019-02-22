@@ -1,0 +1,40 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoosin</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'profiles/style.css' %}">
+</head>
+<body>
+    <div class="page-header">
+        <div class="row align-self-center" >
+        <div class="col-md-5">
+            <div class="actual-logo">
+                <div class="logo-cont"><p >Hoos</p></div>
+                <img class="logo" src="{% static 'profiles/logo.png' %}">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="center-nav">
+                <div class="search">
+                    <input type="search" style="width: 15vw !important;" class="form-control" value="search...">
+                </div>
+                <div class="other-nav">
+                  <p> <a href=""> students</a> | <a href=""> clubs</a> | <a href="">profile</a> | <a href="">logout</a></p>
+               </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8" style="padding-top: 20px;">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

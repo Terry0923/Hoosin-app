@@ -1,0 +1,44 @@
+
+
+.logo {
+    max-width: 40px;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 5px;
+}
+
+.logo-cont {
+    font-size: 2.1em !important;
+    font-family: 'Open Sans', san-serif !important;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.actual-logo{
+    text-align:center;
+}
+
+.center-nav {
+    text-align: center;
+}
+
+.page-header {
+    height: 65px;
+    padding-top: 10px;
+    background-color: #BCD4E6;
+}
+
+.other-nav {
+    display: inline-block;
+}
+.other-nav a {
+    color: black;
+}
+
+.search {
+    display: inline-block;
+}
+
