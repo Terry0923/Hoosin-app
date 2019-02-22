@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Clubs</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
+{% extends 'profiles/base.html' %}
+{% block content %}
     <h2> List of All Clubs</h2>
 {% if club_list%}
     <ul>
     {% for c in club_list %}
-        <li>{{ c.name }}</li>
+        <div class="border rounded" style="padding: 4px 6px 4px 6px">
+            <h5>{{ c.name }}</h5>
+            <p>{{ c.description }}</div>
     {% endfor %}
     </ul>
 {% else %}
     <p>No clubs exist in the system.</p>
 {% endif %}
-
-
-</body>
-</html>
+{% endblock %}

@@ -4,14 +4,15 @@ from django.db import models
 # Create your models here.
 class Student(models.Model):
     name = models.CharField(max_length=150)
-    YEAR_CHOICES = [("FIRST",1),
-                    ("SECOND", 2),
-                    ("THIRD", 3),
-                    ("FOURTH", 4)]
+    YEAR_CHOICES = [("first", 1),
+                    ("second", 2),
+                    ("third", 3 ),
+                    ("fourth", 4)]
     year = models.CharField(
         max_length=6,
         choices=YEAR_CHOICES,
-        default="FIRST")
+        default="first")
+    major = models.CharField(max_length=150, default="undeclared")
 
     def __str__(self):
         return self.name
@@ -19,6 +20,7 @@ class Student(models.Model):
 
 class Club(models.Model):
     name = models.CharField(max_length=150)
+    description = models.CharField(max_length=350, default="a club on Grounds")
     members = models.ManyToManyField(
         Student,
         through="Membership",

@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ student.name }}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
+{% extends 'profiles/base.html' %}
+{% block content %}
     <h2>Name: {{ student.name }}</h2>
-    <h4>Year: {{ student.year }}</h4>
-</body>
-</html>
+    <p>Year: {{ student.year }}</p>
+    <p>Major: {{ student.major }}</p>
+{% endblock %}
