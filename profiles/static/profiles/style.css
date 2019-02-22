@@ -28,7 +28,7 @@
 .page-header {
     height: 65px;
     padding-top: 10px;
-    background-color: #BCD4E6;
+    background-color: #dce6ec;
 }
 
 .other-nav {
@@ -42,3 +42,8 @@
     display: inline-block;
 }
 
+@media only screen and (max-width: 770px) {
+  .page-header {
+    height: 120px;
+  }
+}
