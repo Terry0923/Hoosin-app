@@ -26,6 +26,18 @@ SECRET_KEY = 'rjabi8oph6=ur^_wz2rnjki%i-u-hq%+=*20%yuf_at_!jc(l1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '769440763457-lmmmdrttl5lfmdtrlun4o44p0f7vf1e7.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1MpnecGGDNVVg13CG_X-56Oz'
+
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = '/profiles/students'
+#LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+
 ALLOWED_HOSTS = []
 
 
@@ -33,13 +45,20 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,6 +139,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+CRISPY_TEMPLATE_PACK='bootstrap4'
 
 django_heroku.settings(locals())

@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +23,11 @@
                     <input type="search" style="width: 15vw !important;" class="form-control" value="search...">
                 </div>
                 <div class="other-nav">
-                  <p> <a href=""> students</a> | <a href=""> clubs</a> | <a href="">profile</a> | <a href="">logout</a></p>
+                  {% if user.is_authenticated %}
+                  <p> <a href=""> students</a> | <a href=""> clubs</a> | <a href={% url 'profile' %}>profile</a>| <a href={% url 'logout' %}>logout</a></p>
+                  {% else %}
+                  <p><a href={% url 'register' %}> register</a> | <a href={% url 'login' %}>Login</a></p>
+                   {% endif %}
                </div>
             </div>
         </div>
