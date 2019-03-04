@@ -7,4 +7,5 @@ urlpatterns = [
     path('students/', views.studentindex, name='student-index'),
     path('clubs/', views.clubindex, name='club-index'),
     path('students/<int:student_id>/', views.detail, name='detail')
+    path('', include('social_django.urls', namespace='social')),
 ]
