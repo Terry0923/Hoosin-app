@@ -28,7 +28,7 @@ DEBUG = True
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
