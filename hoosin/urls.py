@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profiles/', include('profiles.urls')),
-    path('', include('social_django.urls', name='social')),
+    path('', include('social_django.urls', namespace='social')),
     path('login/',auth_views.LoginView.as_view(template_name='profiles/login.html'), name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='profiles/logout.html'),name='logout'),
     path('profile/',profile_views.profile, name='profile'),
