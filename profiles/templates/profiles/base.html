@@ -1,0 +1,45 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoosin</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'profiles/style.css' %}">
+</head>
+<body>
+    <div class="page-header">
+        <div class="row align-self-center" >
+        <div class="col-md-5">
+            <div class="actual-logo">
+                <div class="logo-cont"><p >Hoos</p></div>
+                <img class="logo" src="{% static 'profiles/logo.png' %}">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="center-nav">
+                <div class="search">
+                    <input type="search" style="width: 15vw !important;" class="form-control" value="search...">
+                </div>
+                <div class="other-nav">
+                  {% if user.is_authenticated %}
+                  <p> <a href=""> students</a> | <a href=""> clubs</a> | <a href={% url 'profile' %}>profile</a>| <a href={% url 'logout' %}>logout</a></p>
+                  {% else %}
+                  <p><a href={% url 'register' %}> register</a> | <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></p>
+                   {% endif %}
+               </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8" style="padding-top: 20px;">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
