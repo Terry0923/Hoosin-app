@@ -38,7 +38,7 @@ LOGOUT_REDIRECT_URL = ''
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['virginia.edu']
+SOCIAL_AUTH_hoosin_WHITELISTED_DOMAINS = ['virginia.edu']
 
 
 ALLOWED_HOSTS = ['*']
@@ -114,7 +114,7 @@ WSGI_APPLICATION = 'hoosin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.hoosin'),
     }
 }
 
