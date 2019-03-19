@@ -38,8 +38,11 @@ LOGOUT_REDIRECT_URL = ''
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_HOOSIN_WHITELISTED_DOMAINS = ['virginia.edu']
+SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['virginia.edu']
 
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/user/error/'
+
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -59,8 +62,10 @@ INSTALLED_APPS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
 )
 
 SOCIAL_AUTH_PIPELINE = (
@@ -81,6 +86,8 @@ SOCIAL_AUTH_PIPELINE = (
 
     # Checks if the current social-account is already associated in the site.
     'social_core.pipeline.social_auth.social_user',
+
+    'hoosin.pipeline.auth_allowed',
 
     # Make up a username for this person, appends a random string at the end if
     # there's any collision.
