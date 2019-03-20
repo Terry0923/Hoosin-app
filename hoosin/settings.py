@@ -34,6 +34,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1MpnecGGDNVVg13CG_X-56Oz'
 LOGIN_URL = '/auth/login/google-oauth2/'
 
 LOGIN_REDIRECT_URL = '/profiles/students'
+
 LOGOUT_REDIRECT_URL = ''
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
