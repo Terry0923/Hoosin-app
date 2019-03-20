@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from PIL import Image
 # Create your models here.
 class Student(models.Model):
+    #user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=150)
     #models.ForeignKey(User, on_delete=models.CASCADE)
     YEAR_CHOICES = [("first", 1),
