@@ -80,6 +80,8 @@ SOCIAL_AUTH_PIPELINE = (
     # the unique identifier of the given user in the provider.
     'social_core.pipeline.social_auth.social_uid',
 
+    'hoosin.pipeline.auth_allowed',
+
     # Verifies that the current auth process is valid within the current
     # project, this is where emails and domains whitelists are applied (if
     # defined).
@@ -87,8 +89,6 @@ SOCIAL_AUTH_PIPELINE = (
 
     # Checks if the current social-account is already associated in the site.
     'social_core.pipeline.social_auth.social_user',
-
-    'hoosin.pipeline.auth_allowed',
 
     # Make up a username for this person, appends a random string at the end if
     # there's any collision.
