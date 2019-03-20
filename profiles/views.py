@@ -8,7 +8,9 @@ from django.contrib import messages
 
 def studentindex(request):
     student_list = Student.objects.order_by('name')
-    context = {'student_list': student_list}
+    context = {
+        'student_list': student_list
+    }
     return render(request, 'profiles/studentIndex.html', context)
 
 
@@ -25,6 +27,19 @@ def detail(request, student_id):
         raise Http404("Student does not exist")
     return render(request, 'profiles/detail.html', {'student': student})
 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'profiles/register.html', {'form': form})
+
+
 @login_required
 def profile(request):
     if request.method == 'POST':
@@ -37,6 +52,7 @@ def profile(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
+
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -45,17 +61,5 @@ def profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render(request,'profiles/profile.html', context)
 
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'profiles/register.html', {'form': form})
+    return render(request, 'profiles/profile.html', context)
