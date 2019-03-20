@@ -9,4 +9,4 @@ django-crispy-forms==1.7.2
 social-auth-app-django==1.2.0
 social-auth-core
 django-bootstrap4
-Pillow
+Pillow==5.4.1
