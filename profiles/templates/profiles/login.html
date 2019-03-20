@@ -13,13 +13,10 @@
             </div>
         </form>
         <div class="border-top pt-3">
-            <small class="text-muted">
-                Log in to Google Account <a class="ml-2" href="{% url 'social:begin' 'google-oauth2' %}">Google Login</a>
-            </small>
+            <p class="text-muted">
+                Or, log in to your Google Account with <a href="{% url 'social:begin' 'google-oauth2' %}">Google Login</a>. Hoosin supports all virginia.edu domains.
+            </p>
         </div>
-            <small class="text-muted">
-                Do not have an account? <a class="ml-2" href="{% url 'register' %}">Sign up Now!</a>
-            </small>
         </div>
     </div>
 {% endblock content %}
