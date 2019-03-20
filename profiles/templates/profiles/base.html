@@ -24,9 +24,9 @@
                 </div>
                 <div class="other-nav">
                   {% if user.is_authenticated %}
-                  <p> <a href="{% url 'profiles:student-index' %}"> students</a> | <a href=""> clubs</a> | <a href={% url 'profile' %}>profile</a>| <a href={% url 'logout' %}>logout</a></p>
+                  <p> <a href="{% url 'profiles:student-index' %}"> students</a> | <a href=""> clubs</a> | <a href={% url 'profile' %}>profile</a> | <a href={% url 'logout' %}>logout</a></p>
                   {% else %}
-                  <p><a href={% url 'register' %}> register</a> | <a href="{% url 'social:begin' 'google-oauth2' %}">Login</a></p>
+                  <p> <a href="{% url 'register' %}"> register</a> | <a href="{% url 'login' %}">login</a></p>
                    {% endif %}
                </div>
             </div>
