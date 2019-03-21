@@ -2,12 +2,14 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404
 from .models import Student, Club, Profile
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm #ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django import forms
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 def studentindex(request):
-    student_list = Student.objects.order_by('name')
+    #student_list = Student.objects.order_by('username')
+    student_list = User.objects.all()#values_list('username', flat=True)
     context = {
         'student_list': student_list
     }
@@ -44,6 +46,7 @@ def register(request):
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
         # p_form = ProfileUpdateForm(request.POST,
         #                           request.FILES,
         #                           instance=request.user.profile)
@@ -55,11 +58,11 @@ def profile(request):
     else:
         user = Profile.objects.get_or_create(user=request.user)
         u_form = UserUpdateForm(instance=request.user)
-    #   p_form = ProfileUpdateForm(instance=request.user.profile)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
-    #   'p_form': p_form
+        'p_form': p_form
     }
 
     return render(request, 'profiles/profile.html', context)

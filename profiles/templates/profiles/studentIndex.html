@@ -6,8 +6,8 @@
     {% for s in student_list %}
 
         <div class="border rounded" style="padding: 4px 6px 4px 6px">
-            <h5>{{ s.name }}</h5>
-            <p>year {{ s.year }}, {{ s.major }} major</div>
+             <h5>{{ s.username }}</h5>
+            <p>year {{ s.profile.year }}, {{ s.profile.major }} major</div>
     {% endfor %}
     </ul>
 {% else %}

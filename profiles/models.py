@@ -40,6 +40,15 @@ class Membership(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 #    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    YEAR_CHOICES = [("first", 1),
+                    ("second", 2),
+                    ("third", 3 ),
+                    ("fourth", 4)]
+    year = models.CharField(
+        max_length=6,
+        choices=YEAR_CHOICES,
+        default="first")
+    major = models.CharField(max_length=150, default="undeclared")
 
     def __str__(self):
         return f'{self.user.username} Profile'
