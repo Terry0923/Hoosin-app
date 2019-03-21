@@ -23,9 +23,8 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['year','major']
 
 
-'''
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
-'''
