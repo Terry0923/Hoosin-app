@@ -16,3 +16,4 @@ imageio==2.4.1
 imagesize==1.1.0
 importlib-metadata==0.7
 Pillow==5.4.1
+imagekit
