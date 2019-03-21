@@ -1,3 +1,5 @@
+-e hg+https://bitbucket.org/etienned/pil-2009-raclette/#egg=PIL
+Pillow==5.4.1
 dj-database-url==0.5.0
 django==2.1.5
 django-heroku==0.3.1
@@ -9,4 +11,3 @@ django-crispy-forms==1.7.2
 social-auth-app-django==1.2.0
 social-auth-core
 django-bootstrap4
-Pillow==5.4.1
