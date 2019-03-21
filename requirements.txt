@@ -11,3 +11,7 @@ social-auth-core
 django-bootstrap4
 pip==19.0.3
 django-imagekit==4.0.2
+image==1.5.27
+imageio==2.4.1
+imagesize==1.1.0
+importlib-metadata==0.7
