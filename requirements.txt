@@ -10,4 +10,4 @@ social-auth-app-django==1.2.0
 social-auth-core
 django-bootstrap4
 pip==19.0.3
-sorl-thumbnail==12.5.0
+django-imagekit==4.0.2
