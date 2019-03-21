@@ -44,6 +44,7 @@ def register(request):
 
 @login_required
 def profile(request):
+    user = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
@@ -56,7 +57,6 @@ def profile(request):
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
     else:
-        user = Profile.objects.get_or_create(user=request.user)
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
