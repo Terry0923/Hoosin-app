@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
 # Create your models here.
 class Student(models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -40,6 +42,12 @@ class Membership(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
+    image_thumbnail = ImageSpecField(source='image',
+                                processors=[ResizeToFill(300,300)],
+                                format='JPEG',
+                                options={'quality':60})
+
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
                     ("third", 3 ),
@@ -53,14 +61,16 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
+
     def save(self, force_insert=False, force_update=False, using=None):
         super().save()
 
 
-
+'''
         img = Image.open(self.image.path)
 
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+'''
