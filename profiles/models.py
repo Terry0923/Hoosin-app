@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
 
 # Create your models here.
 class Student(models.Model):
@@ -43,10 +41,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
-    image_thumbnail = ImageSpecField(source='image',
-                                processors=[ResizeToFill(300,300)],
-                                format='JPEG',
-                                options={'quality':60})
 
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
