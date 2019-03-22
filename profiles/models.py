@@ -20,9 +20,8 @@ class Student(models.Model):
     def __str__(self):
         return self.name
 
-
 class Club(models.Model):
-    name = models.CharField(max_length=150        <img class="rounded-circle account-img" src="{{ user.profile.image_thumbnail.url }}">)
+    name = models.CharField(max_length=150)
     description = models.CharField(max_length=350, default="a club on Grounds")
     members = models.ManyToManyField(
         Student,
