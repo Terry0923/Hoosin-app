@@ -38,7 +38,7 @@ class Membership(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+#    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
 
     YEAR_CHOICES = [("first", 1),
@@ -55,7 +55,7 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
-    def save(self, force_insert=False, force_update=False, using=None):
+def save(self, force_insert=False, force_update=False, using=None):
         super().save()
 
 
