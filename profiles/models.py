@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
+#from PIL import Image
 # Create your models here.
 class Student(models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -22,7 +22,7 @@ class Student(models.Model):
 
 
 class Club(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150        <img class="rounded-circle account-img" src="{{ user.profile.image_thumbnail.url }}">)
     description = models.CharField(max_length=350, default="a club on Grounds")
     members = models.ManyToManyField(
         Student,
@@ -60,10 +60,11 @@ class Profile(models.Model):
         super().save()
 
 
-
+'''
         img = Image.open(self.image.path)
 
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+'''
