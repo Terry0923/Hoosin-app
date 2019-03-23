@@ -40,9 +40,7 @@ def register(request):
                 messages.success(request, f'Your account has been created! You are now able to log in')
                 return redirect('login')
             else:
-                return redirect('profiles/error.html')
-            # messages.success(request, f'Your account has been created! You are now able to log in')
-            # return redirect('login')
+                return render(request, 'profiles/error.html')
     else:
         form = UserRegisterForm()
     return render(request, 'profiles/register.html', {'form': form})
