@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 #from PIL import Image
+
 # Create your models here.
 class Student(models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -39,7 +40,6 @@ class Membership(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 #    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-
 
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),

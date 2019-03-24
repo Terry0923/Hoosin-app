@@ -35,12 +35,23 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! You are now able to log in')
+            messages.success(request, f'Your account has been created! You are now able to log in.')
             return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'profiles/register.html', {'form': form})
 
+def search_form(request):
+    return render(request, 'profiles/search_form.html')
+
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        matches = User.objects.filter(username__icontains=q)
+        return render(request, 'profiles/search_results.html',
+                      {'matches': matches, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
 
 @login_required
 def profile(request):

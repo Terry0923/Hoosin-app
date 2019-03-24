@@ -1,0 +1,23 @@
+{% extends 'profiles/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<html>
+    <head>
+    <h2>Student Search</h2>
+    </head>
+    <body>
+        <p>You searched for: <strong>{{ query }}</strong></p>
+
+        {% if matches %}
+            <p>Found {{ matches|length }} match{{ matches|pluralize:"es" }}.</p>
+            <ul>
+                {% for match in matches %}
+                <li>{{ match.username }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No students matched your search criteria.</p>
+        {% endif %}
+    </body>
+</html>
+{% endblock %}
