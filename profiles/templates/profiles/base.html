@@ -22,7 +22,7 @@
                     <!--<div class="search">-->
                         <!--<input type="search" style="width: 15vw !important;" class="form-control" value="search...">-->
                     <!--</div>-->
-                    <div class="other-nav">
+                    <div class="other-nav" style="margin-top:8px;">
                       {% if user.is_authenticated %}
                       <p> <a href="{% url 'profiles:search-form' %}"> search </a> | <a href="{% url 'profiles:student-index' %}"> students</a> | <a href="{% url 'profiles:club-index' %}"> clubs</a> | <a href="{% url 'profile' %}">profile</a> | <a href="{% url 'logout' %}">logout</a></p>
                       {% else %}
