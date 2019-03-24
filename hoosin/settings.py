@@ -39,7 +39,6 @@ LOGOUT_REDIRECT_URL = ''
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-
 #ALLOWED_HOSTS = []
 
 # Application definition
@@ -141,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 
-STATIC_URL = '/static/'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -149,7 +148,8 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK='bootstrap4'
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, "allstaticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = ['testcases123.herokuapp.com', 'localhost', '127.0.0.1']
 
