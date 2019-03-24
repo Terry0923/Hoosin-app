@@ -153,4 +153,6 @@ STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = ['testcases123.herokuapp.com', 'localhost', '127.0.0.1']
 
-django_heroku.settings(locals())
+if '/app' in os.environ['HOME']:
+    import django_heroku
+    django_heroku.settings(locals())
