@@ -147,8 +147,8 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
 
-# PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-# STATIC_ROOT = os.path.join(PROJECT_DIR, 'profiles/static/profiles')
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'profiles/static')
 
 ALLOWED_HOSTS = ['testcases123.herokuapp.com', 'localhost', '127.0.0.1']
 
