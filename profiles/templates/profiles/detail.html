@@ -1,6 +1,9 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-    <h2>Name: {{ student.name }}</h2>
-    <p>Year: {{ student.year }}</p>
-    <p>Major: {{ student.major }}</p>
+    <h2>Name: {{ uid.username }}</h2>
+    <p>Email: {{ uid.email }}</p>
+    <p>First name: {{ uid.first_name }} </p>
+    <p>Last name: {{ uid.last_name }} </p>
+    <p>Year: {{ uid.year }}</p>
+    <p>Major: {{ uid.major }}</p>
 {% endblock %}

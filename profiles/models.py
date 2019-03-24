@@ -10,7 +10,7 @@ class Student(models.Model):
     #models.ForeignKey(User, on_delete=models.CASCADE)
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
-                    ("third", 3 ),
+                    ("third", 3),
                     ("fourth", 4)]
     year = models.CharField(
         max_length=6,

@@ -21,13 +21,12 @@ def clubindex(request):
     context = {'club_list': club_list}
     return render(request, 'profiles/clubIndex.html', context)
 
-
-def detail(request, student_id):
+def detail(request, username):
     try:
-        student = Student.objects.get(pk=student_id)
-    except Student.DoesNotExist:
-        raise Http404("Student does not exist")
-    return render(request, 'profiles/detail.html', {'student': student})
+        uid = User.objects.get(username=username)
+    except User.DoesNotExist:
+        raise Http404('User not found')
+    return render(request, 'profiles/detail.html', {'uid':uid})
 
 def register(request):
     if request.method == 'POST':
@@ -65,7 +64,7 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your account has been updated!')
+            messages.success(request, 'Your account has been updated!')
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
