@@ -11,6 +11,6 @@ urlpatterns = [
     #path('search-form/', views.search_form),
     #path('search/', views.search),
     path('students/<str:username>/', views.detail),
-    url(r'^search-form/$', views.search_form),
+    url(r'^search-form/$', views.search_form, name='search-form'),
     url(r'^search/$', views.search),
 ]

@@ -13,7 +13,7 @@
             <ul>
                 {% for match in matches %}
                 <div class="border rounded" style="padding: 4px 6px 4px 6px">
-                    <h5>{{ match.username }}</h5>
+                    <h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>
                     {% if match.first_name %}
                         <p>{{ match.first_name }} {{ match.last_name }}, {{ match.profile.year }} year, {{ match.profile.major }} major</p>
                     {% else %}
