@@ -46,8 +46,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
     'hd': 'virginia.edu'
 }
 
-ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -207,8 +205,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
