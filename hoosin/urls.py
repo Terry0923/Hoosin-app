@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import pipeline
 from django.contrib.auth import views as auth_views
 from profiles import views as profile_views
 from django.conf import settings
@@ -28,6 +29,7 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(template_name='profiles/logout.html'),name='logout'),
     path('profile/',profile_views.profile, name='profile'),
     path('register/', profile_views.register, name='register'),
+    path('error/', pipeline.create_user, name='error'),
 ]
 
 if settings.DEBUG:
