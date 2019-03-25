@@ -1,0 +1,15 @@
+{% extends 'profiles/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<html>
+<head>
+    <h2>Search for Students</h2>
+</head>
+<body>
+    <form action="/profiles/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
+{% endblock %}

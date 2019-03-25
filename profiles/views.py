@@ -22,12 +22,13 @@ def clubindex(request):
     return render(request, 'profiles/clubIndex.html', context)
 
 
-def detail(request, student_id):
+def detail(request, username):
     try:
-        student = Student.objects.get(pk=student_id)
-    except Student.DoesNotExist:
-        raise Http404("Student does not exist")
-    return render(request, 'profiles/detail.html', {'student': student})
+        uid = User.objects.get(username=username)
+    except User.DoesNotExist:
+        raise Http404('User not found')
+    return render(request, 'profiles/detail.html', {'uid':uid})
+
 
 def register(request):
     if request.method == 'POST':
@@ -41,6 +42,17 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'profiles/register.html', {'form': form})
 
+def search_form(request):
+    return render(request, 'profiles/search_form.html')
+
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        matches = User.objects.filter(username__icontains=q)
+        return render(request, 'profiles/search_results.html',
+                      {'matches': matches, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
 
 @login_required
 def profile(request):
