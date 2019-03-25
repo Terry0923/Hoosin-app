@@ -19,8 +19,7 @@ USER_FIELDS = ['username', 'email']
 
 
 def allowed_email(email):
-    return re.match('.*@acme\.com', email) or \
-        re.match('.*@acme\.net', email)
+    return re.match('.*@virginia\.edu', email)
 
 
 def create_user(strategy, details, backend, user=None, *args, **kwargs):
