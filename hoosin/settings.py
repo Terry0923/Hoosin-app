@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
-    'social.apps.django_app.default',
+#    'social.apps.django_app.default',
 ]
 
 AUTHENTICATION_BACKENDS = (
