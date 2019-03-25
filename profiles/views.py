@@ -29,19 +29,14 @@ def detail(request, student_id):
         raise Http404("Student does not exist")
     return render(request, 'profiles/detail.html', {'student': student})
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            if "@virginia.edu" in email:
-                messages.success(request, f'Your account has been created! You are now able to log in')
-                return redirect('login')
-            else:
-                return render(request, 'profiles/error.html')
+            messages.success(request, f'Your account has been created! You are now able to log in.')
+            return redirect('login')
     else:
         form = UserRegisterForm()
     return render(request, 'profiles/register.html', {'form': form})
