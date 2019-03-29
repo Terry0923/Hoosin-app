@@ -10,5 +10,5 @@ urlpatterns = [
     path('clubs/', views.clubindex, name='club-index'),
     path('students/<str:username>/', views.detail),
     url(r'^search-form/$', views.search_form, name='search-form'),
-    url(r'^search/$', views.search),
+    url(r'^search/$', views.search, name='search-results'),
 ]
