@@ -2,13 +2,11 @@ certifi==2018.11.29
 chardet==3.0.4
 defusedxml==0.5.0
 dj-database-url==0.5.0
-<<<<<<< HEAD
 Django==2.1.7
 django-bootstrap4==0.0.7
 django-crispy-forms==1.7.2
+django-haystack==2.8.1
 django-heroku==0.3.1
-=======
->>>>>>> 35ceefe30c4f2c18175a7fb4b7f538fab28fbb64
 gunicorn==19.9.0
 idna==2.8
 oauthlib==3.0.1

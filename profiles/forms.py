@@ -22,10 +22,17 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['year','major']
 
-
 '''
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
 '''
+
+SEARCH_CHOICES= [
+    ('student', 'Students'),
+    ('club', 'clubs'),
+    ]
+
+class SearchForm(forms.ModelForm):
+    search_query = forms.CharField(max_length=100)
