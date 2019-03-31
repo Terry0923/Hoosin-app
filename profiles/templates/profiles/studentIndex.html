@@ -1,13 +1,13 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-<h2> List of All Students </h2>
+<h2>All Students </h2>
 {% if student_list %}
-    <ul>
+    <ul class="list-group">
     {% for s in student_list %}
 
-        <div class="border rounded" style="padding: 4px 6px 4px 6px">
+        <li class="list-group-item">
              <h5>{{ s.username }}</h5>
-            <p>{{ s.profile.year }} year, {{ s.profile.major }} major</div>
+            <p>{{ s.profile.year }} year, {{ s.profile.major }} major</li>
     {% endfor %}
     </ul>
 {% else %}

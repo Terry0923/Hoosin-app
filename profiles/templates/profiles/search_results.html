@@ -4,16 +4,16 @@
 {% block content %}
 <html>
     <head>
-    <h2>Student Search</h2>
+    <h2>Search Results</h2>
     </head>
     <body>
         <p>You searched for: <strong>{{ query }}</strong></p>
 
         {% if matches %}
-            <p>Found {{ matches|length }} match{{ matches|pluralize:"es" }}.</p>
-            <ul>
+            <p style="margin-top:-15px;">Found {{ matches|length }} match{{ matches|pluralize:"es" }}.</p>
+            <ul class="list-group">
                 {% for match in matches %}
-                <div class="border rounded" style="padding: 4px 6px 4px 6px">
+                <div class="list-group-item">
                     <h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>
                     {% if match.first_name %}
                         <p>{{ match.first_name }} {{ match.last_name }}, {{ match.profile.year }} year, {{ match.profile.major }} major</p>

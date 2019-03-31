@@ -7,6 +7,13 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
 
+def home(request):
+    return render(request, 'profiles/home.html')
+
+
+def about(request):
+    return render(request, 'profiles/about.html')
+
 def studentindex(request):
     #student_list = Student.objects.order_by('username')
     student_list = User.objects.all()#values_list('username', flat=True)

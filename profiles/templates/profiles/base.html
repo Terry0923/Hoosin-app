@@ -9,30 +9,75 @@
     <link rel="stylesheet" href="{% static 'profiles/style.css' %}">
 </head>
 <body>
-    <div class="page-header">
-        <div class="row align-self-center">
-            <div class="col-md-4">
-                <div class="actual-logo">
-                    <div class="logo-cont"><p >Hoos</p></div>
-                    <img class="logo" src="{% static 'profiles/logo.png' %}">
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="center-nav">
-                    <!--<div class="search">-->
-                        <!--<input type="search" style="width: 15vw !important;" class="form-control" value="search...">-->
-                    <!--</div>-->
-                    <div class="other-nav" style="margin-top:8px;">
-                      {% if user.is_authenticated %}
-                      <p> <a href="{% url 'profiles:search-form' %}"> search </a> | <a href="{% url 'profiles:student-index' %}"> students</a> | <a href="{% url 'profiles:club-index' %}"> clubs</a> | <a href="{% url 'profile' %}">profile</a> | <a href="{% url 'logout' %}">logout</a></p>
-                      {% else %}
-                      <p> <a href="{% url 'register' %}"> register</a> | <a href="{% url 'login' %}">login</a></p>
-                       {% endif %}
-                   </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+     <div style="margin-bottom: -10px;">
+         <div class="actual-logo" style="margin-left: 40px">
+             <div class="logo-cont"><p >Hoos</p></div>
+             <img class="logo" src="{% static 'profiles/logo.png' %}">
+         </div>
+     </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          {% if user.is_authenticated %}
+            <ul class="navbar-nav" style="margin-left: 40px;">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profiles:search-form' %}">Search <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profiles:student-index' %}">Students</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profiles:club-index' %}">Skill Groups</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav" style="margin-left: 40px;">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login  <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+
+            </ul>
+            {% endif %}
+
+      </div>
+    </nav>
+
+    <!--<div class="page-header">-->
+        <!--<div class="row align-self-center">-->
+
+            <!--<div class="col-md-8">-->
+                <!--<div class="center-nav">-->
+                    <!--&lt;!&ndash;<div class="search">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="search" style="width: 15vw !important;" class="form-control" value="search...">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<div class="other-nav" style="margin-top:8px;">-->
+                      <!--{% if user.is_authenticated %}-->
+                      <!--<p> <a href="{% url 'profiles:search-form' %}"> search </a>
+                       <a href="{% url 'profiles:student-index' %}"> students</a>
+                        <a href="{% url 'profiles:club-index' %}"> clubs</a>
+                        <a href="{% url 'profile' %}">profile</a>
+                        <a href="{% url 'logout' %}">logout</a></p>-->
+                      <!--{% else %}-->
+                      <!--<p>
+                        <a href="{% url 'register' %}"> register</a>
+                        <a href="{% url 'login' %}">login</a></p>-->
+                       <!--{% endif %}-->
+                   <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="content container">
         <div class="row">
             <div class="col-md-8" style="padding-top: 20px;">

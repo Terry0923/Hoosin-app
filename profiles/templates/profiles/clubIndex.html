@@ -1,12 +1,12 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-    <h2> List of All Clubs</h2>
+    <h2>All Skill Groups</h2>
 {% if club_list%}
-    <ul>
+    <ul class="list-group">
     {% for c in club_list %}
-        <div class="border rounded" style="padding: 4px 6px 4px 6px">
+        <li class="list-group-item">
             <h5>{{ c.name }}</h5>
-            <p>{{ c.description }}</div>
+            <p>{{ c.description }}</li>
     {% endfor %}
     </ul>
 {% else %}
