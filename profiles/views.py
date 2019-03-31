@@ -6,6 +6,8 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
+from itertools import chain
+
 
 def home(request):
     return render(request, 'profiles/home.html')
@@ -55,9 +57,13 @@ def search_form(request):
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        matches = User.objects.filter(username__icontains=q)
+        users = User.objects.filter(username__icontains=q)
+        club_name = Club.objects.filter(name__icontains=q)
+        club_desc = Club.objects.filter(description__icontains=q)
+        clubs = list(dict.fromkeys(list(chain(club_name, club_desc))))
+        # matches = chain(users, clubs)
         return render(request, 'profiles/search_results.html',
-                      {'matches': matches, 'query': q})
+                      {'user_matches': users, 'club_matches': clubs, 'query': q})
     else:
         return HttpResponse('Please submit a search term.')
 

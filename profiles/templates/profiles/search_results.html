@@ -4,27 +4,45 @@
 {% block content %}
 <html>
     <head>
-    <h2>Search Results</h2>
+    <h2>Search Results: '{{ query }}'</h2>
     </head>
     <body>
-        <p>You searched for: <strong>{{ query }}</strong></p>
 
-        {% if matches %}
-            <p style="margin-top:-15px;">Found {{ matches|length }} match{{ matches|pluralize:"es" }}.</p>
+
+        <legend class="border-bottom mb-4">Students</legend>
+        {% if user_matches|length > 0%}
+            <p style="margin-top:-15px;">Found {{ user_matches|length }} match{{ user_matches|pluralize:"es" }}.</p>
             <ul class="list-group">
-                {% for match in matches %}
-                <div class="list-group-item">
+                {% for match in user_matches %}
+                <li class="list-group-item">
                     <h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>
                     {% if match.first_name %}
                         <p>{{ match.first_name }} {{ match.last_name }}, {{ match.profile.year }} year, {{ match.profile.major }} major</p>
                     {% else %}
                         <p>{{ match.profile.year }} year, {{ match.profile.major }} major</p>
                     {% endif %}
-                </div>
+                </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No students matched your search criteria.</p>
+            <p style="margin-top: -10px;">Found no matches to students with your criteria.</p>
+        {% endif %}
+
+        <legend class="border-bottom mb-4" style="margin-top: 15px;">Skill Groups</legend>
+        {% if club_matches %}
+            <p style="margin-top:-15px;">Found {{ club_matches|length }} match{{ club_matches|pluralize:"es" }} to clubs.</p>
+            <ul class="list-group">
+                {% for match in club_matches %}
+                <li class="list-group-item">
+                    <h5><a href="/profiles/clubs/{{ match.name }}">{{ match.name }}</a></h5>
+                    {% if match.description %}
+                        <p>{{ match.description }} </p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="margin-top: -10px;">Found no matches to clubs with your criteria.</p>
         {% endif %}
     </body>
 </html>

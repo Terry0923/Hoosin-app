@@ -187,7 +187,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -218,6 +217,6 @@ STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = ['testcases123.herokuapp.com', 'localhost', '127.0.0.1']
 
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
+# if '/app' in os.environ['HOME']:
+#     import django_heroku
+#     django_heroku.settings(locals())
