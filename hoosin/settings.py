@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'django.contrib.postgres',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -152,6 +153,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = ['testcases123.herokuapp.com', 'localhost', '127.0.0.1']
+
 
 if '/app' in os.environ['HOME']:
     import django_heroku

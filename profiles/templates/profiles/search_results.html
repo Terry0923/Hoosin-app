@@ -8,10 +8,38 @@
     <body>
         <p>You searched for: <strong>{{ query }}</strong></p>
 
-        {% if matches %}
-            <p>Found {{ matches|length }} match{{ matches|pluralize:"es" }}.</p>
+        {% if matches_username %}
+            <p>Found {{ matches_username|length }} username match{{ matches_username|pluralize:"es" }}.</p>
             <ul>
-                {% for match in matches %}
+                {% for match in matches_username %}
+                <div class="border rounded" style="padding: 4px 6px 4px 6px">
+                    <h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>
+                    {% if match.first_name %}
+                        <p>{{ match.first_name }} {{ match.last_name }}, {{ match.profile.year }} year, {{ match.profile.major }} major</p>
+                    {% else %}
+                        <p>{{ match.profile.year }} year, {{ match.profile.major }} major</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </ul>
+        {% elif matches_first_name %}
+            <p>Found {{ matches_first_name|length }} first name match{{ matches_first_name|pluralize:"es" }}.</p>
+            <ul>
+                {% for match in matches_first_name %}
+                <div class="border rounded" style="padding: 4px 6px 4px 6px">
+                    <h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>
+                    {% if match.first_name %}
+                        <p>{{ match.first_name }} {{ match.last_name }}, {{ match.profile.year }} year, {{ match.profile.major }} major</p>
+                    {% else %}
+                        <p>{{ match.profile.year }} year, {{ match.profile.major }} major</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </ul>
+        {% elif matches_last_name %}
+            <p>Found {{ matches_last_name|length }} match{{ matches_last_name|pluralize:"es" }}.</p>
+            <ul>
+                {% for match in matches_last_name %}
                 <div class="border rounded" style="padding: 4px 6px 4px 6px">
                     <h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>
                     {% if match.first_name %}

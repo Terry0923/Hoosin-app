@@ -6,6 +6,8 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.operations import UnaccentExtension
 
 def studentindex(request):
     #student_list = Student.objects.order_by('username')
@@ -46,11 +48,20 @@ def search_form(request):
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        matches = User.objects.filter(username__icontains=q)
+        matches_username = User.objects.filter(username__icontains=q)
+        matches_first_name = User.objects.filter(first_name__icontains=q)
+        matches_last_name = User.objects.filter(last_name__contains=q)
+        matches_club_name = Club.objects.filter(name__icontains=q)
+        # User.objects.filter(username__unaccent__icontains=q)
         return render(request, 'profiles/search_results.html',
-                      {'matches': matches, 'query': q})
+                      {'matches_username': matches_username,
+                       'matches_first_name': matches_first_name,
+                       'matches_last_name': matches_last_name,
+                       'matches_club_name': matches_club_name,
+                       'query': q})
     else:
         return HttpResponse('Please submit a search term.')
+
 
 @login_required
 def profile(request):
