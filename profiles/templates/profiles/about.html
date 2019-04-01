@@ -10,7 +10,24 @@
 </head>
 
 
-<body>
-this is the about page we will make it litty
+<body style="background-color: #e3f2fd;">
+<div class="splash" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({% static 'profiles/rotunda.jpg' %});
+    background-size: auto 100%;">
+</div>
+<div class="text">
+<div class="actual-logo-home">
+    <div class="about-text">
+    <h2> About Hoosin</h2>
+        <p> HoosIn is a skill matching platform that allows UVA students to find other peers with similar interests,
+            or seek out mentors for new pursuits. Students can update their profile with academic information, join skill groups based on their expertise,
+            and browse other students and skill groups. </p>
+        <p> CS3240, Advanced Software Development, Spring 2019 </p>
+        <p> Developed by <br> Pauline Vu (ptv6ug), Saad Khan (sk4gw), Megan Do (md9bt), Terry Tsai (jt2fx), and Gautam Kakanaboyina (gk2at)</p>
+        <button class="join btn btn-info">
+            <a style="text-decoration: none; color: #eee;" href="{% url 'home' %}">Back to Home</a>
+        </button>
+    </div>
 
+</div>
+</div>
 </body>

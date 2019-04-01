@@ -1,4 +1,50 @@
+.splash {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.75;
+}
 
+.logo-home {
+    max-width: 75px;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 5px;
+}
+
+.about-text {
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.join {
+    margin: 5px auto;
+}
+
+.logo-home-cont {
+    font-size: 4em !important;
+    font-family: 'Open Sans', san-serif !important;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.text{
+    background-color: #eee;
+    width: 35%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px 10px 10px 10px;
+    padding: 20px;
+    position: relative;
+    top: 25%;
+    text-align: center;
+}
 
 .logo {
     max-width: 40px;

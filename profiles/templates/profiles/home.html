@@ -10,7 +10,26 @@
 </head>
 
 
-<body>
-this is the home page we will make it litty
+<body style="background-color: #e3f2fd;">
+<div class="splash" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({% static 'profiles/rotunda.jpg' %});
+    background-size: auto 100%;">
+</div>
+<div class="text">
+<div class="actual-logo-home">
+    <div class="logo-home-cont"><p >Hoos</p></div>
+    <img class="logo-home" src="{% static 'profiles/logo-filled.png' %}">
+    <p style="display: block; margin-left: 20px; margin-right: 20px;">
+        HoosIn is a skill matching platform specifically for UVA students! <a href="{% url 'about' %}">Learn more,</a> or join now using your Netbadge credentials or with your UVA email.
+    </p>
 
+    <div style="display: block;">
+        <button class="join btn btn-info">
+            <a style="text-decoration: none; color: #eee;" href="{% url 'login' %}">Login</a>
+        </button>
+        <button class="join btn btn-info">
+            <a style="text-decoration: none; color: #eee;" href="{% url 'register' %}">Register</a>
+        </button>
+    </div>
+</div>
+</div>
 </body>
