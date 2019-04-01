@@ -92,4 +92,9 @@
   .page-header {
     height: 120px;
   }
+
+  .text {
+    width: 70%;
+    top: 10%;
+  }
 }
