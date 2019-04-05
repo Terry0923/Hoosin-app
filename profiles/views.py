@@ -51,19 +51,21 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'profiles/register.html', {'form': form})
 
-def search_form(request):
-    return render(request, 'profiles/search_form.html')
+def search_control(request):
+    return render(request, 'profiles/search_control.html')
 
-def search(request):
+def club_search_form(request):
+    return render(request, 'profiles/club_search_form.html')
+
+def club_search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        users = User.objects.filter(username__icontains=q)
+        # users = User.objects.filter(username__icontains=q)
         club_name = Club.objects.filter(name__icontains=q)
         club_desc = Club.objects.filter(description__icontains=q)
         clubs = list(dict.fromkeys(list(chain(club_name, club_desc))))
-        # matches = chain(users, clubs)
         return render(request, 'profiles/search_results.html',
-                      {'user_matches': users, 'club_matches': clubs, 'query': q})
+                      {'matches': clubs, 'query': q})
     else:
         return HttpResponse('Please submit a search term.')
 

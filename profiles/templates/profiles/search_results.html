@@ -8,31 +8,30 @@
     </head>
     <body>
 
-
-        <legend class="border-bottom mb-4">Students</legend>
-        {% if user_matches|length > 0%}
-            <p style="margin-top:-15px;">Found {{ user_matches|length }} match{{ user_matches|pluralize:"es" }}.</p>
-            <ul class="list-group">
-                {% for match in user_matches %}
-                <li class="list-group-item">
-                    <h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>
-                    {% if match.first_name %}
-                        <p>{{ match.first_name }} {{ match.last_name }}, {{ match.profile.year }} year, {{ match.profile.major }} major</p>
-                    {% else %}
-                        <p>{{ match.profile.year }} year, {{ match.profile.major }} major</p>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p style="margin-top: -10px;">Found no matches to students with your criteria.</p>
-        {% endif %}
+        <!--<legend class="border-bottom mb-4">Students</legend>-->
+        <!--{% if user_matches|length > 0%}-->
+            <!--<p style="margin-top:-15px;">Found {{ user_matches|length }} match{{ user_matches|pluralize:"es" }}.</p>-->
+            <!--<ul class="list-group">-->
+                <!--{% for match in user_matches %}-->
+                <!--<li class="list-group-item">-->
+                    <!--<h5><a href="/profiles/students/{{ match.username }}">{{ match.username }}</a></h5>-->
+                    <!--{% if match.first_name %}-->
+                        <!--<p>{{ match.first_name }} {{ match.last_name }}, {{ match.profile.year }} year, {{ match.profile.major }} major</p>-->
+                    <!--{% else %}-->
+                        <!--<p>{{ match.profile.year }} year, {{ match.profile.major }} major</p>-->
+                    <!--{% endif %}-->
+                <!--</li>-->
+                <!--{% endfor %}-->
+            <!--</ul>-->
+        <!--{% else %}-->
+            <!--<p style="margin-top: -10px;">Found no matches to students with your criteria.</p>-->
+        <!--{% endif %}-->
 
         <legend class="border-bottom mb-4" style="margin-top: 15px;">Skill Groups</legend>
-        {% if club_matches %}
-            <p style="margin-top:-15px;">Found {{ club_matches|length }} match{{ club_matches|pluralize:"es" }} to clubs.</p>
+        {% if matches %}
+            <p style="margin-top:-15px;">Found {{ matches|length }} skill group match{{ matches|pluralize:"es" }}.</p>
             <ul class="list-group">
-                {% for match in club_matches %}
+                {% for match in matches %}
                 <li class="list-group-item">
                     <h5><a href="/profiles/clubs/{{ match.name }}">{{ match.name }}</a></h5>
                     {% if match.description %}
@@ -42,7 +41,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p style="margin-top: -10px;">Found no matches to clubs with your criteria.</p>
+            <p style="margin-top: -10px;">Found no matches to skill groups with your criteria.</p>
         {% endif %}
     </body>
 </html>
