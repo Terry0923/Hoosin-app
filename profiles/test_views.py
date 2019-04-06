@@ -39,9 +39,9 @@ class PageTest(TestCase):
         self.assertEquals(response.status_code, 200)
 
     def test_search_form_page_status_code(self):
-        response = self.client.get(reverse('profiles:search-form'))
+        response = self.client.get(reverse('profiles:club-search-form'))
         self.assertEquals(response.status_code, 200)
 
     def test_search_results_page_status_code(self):
-        response = self.client.get(reverse('profiles:search-results'))
+        response = self.client.get(reverse('profiles:club-search'))
         self.assertEquals(response.status_code, 200)
