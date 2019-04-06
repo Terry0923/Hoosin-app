@@ -6,7 +6,7 @@
     {% for s in student_list %}
 
         <li class="list-group-item">
-             <h5>{{ s.username }}</h5>
+             <h5><a href="/profiles/students/{{ s.username }}">{{ s.username }}</a></h5>
             <p>{{ s.profile.year }} year, {{ s.profile.major }} major</li>
     {% endfor %}
     </ul>

@@ -16,6 +16,7 @@ def home(request):
 def about(request):
     return render(request, 'profiles/about.html')
 
+
 def studentindex(request):
     #student_list = Student.objects.order_by('username')
     student_list = User.objects.all()#values_list('username', flat=True)
@@ -39,6 +40,14 @@ def detail(request, username):
     return render(request, 'profiles/detail.html', {'uid':uid})
 
 
+def club_detail(request, name):
+    try:
+        uid = Club.objects.get(name=name)
+    except Club.DoesNotExist:
+        raise Http404('Skill group not found')
+    return render(request, 'profiles/club_detail.html', {'uid':uid})
+
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -51,11 +60,14 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'profiles/register.html', {'form': form})
 
+
 def search_control(request):
     return render(request, 'profiles/search_control.html')
 
+
 def club_search_form(request):
     return render(request, 'profiles/club_search_form.html')
+
 
 def club_search(request):
     if 'q' in request.GET and request.GET['q']:
@@ -68,6 +80,7 @@ def club_search(request):
                       {'matches': clubs, 'query': q})
     else:
         return HttpResponse('Please submit a search term.')
+
 
 @login_required
 def profile(request):

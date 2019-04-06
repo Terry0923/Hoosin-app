@@ -5,7 +5,7 @@
     <ul class="list-group">
     {% for c in club_list %}
         <li class="list-group-item">
-            <h5>{{ c.name }}</h5>
+            <h5><a href="/profiles/clubs/{{ c.name }}">{{ c.name }}</a></h5>
             <p>{{ c.description }}</li>
     {% endfor %}
     </ul>
