@@ -27,7 +27,7 @@ def addPost(request, name):
                 post = Post(headline = data.get('headline'), date=timezone.now(), type = data.get('type'), body = data.get('body'), club = c)
                 post.save()
                 # redirect to a new URL:
-                return HttpResponseRedirect('/profiles/clubs/')
+                return HttpResponseRedirect('/profiles/clubs/'+c.name+'/')
 
         # if a GET (or any other method) we'll create a blank form
     else:
@@ -70,13 +70,8 @@ def skillGroupDetail(request, name):
     return render(request, 'profiles/skillGroupDetail.html', {'c':c})
 
 
-def join(request, c, user):
-    club, created = Club.objects.get(name=c.name, description=c.description)
-    club.save()
-    u = user
-    u.save()
-    club.users.add(u)
-    return render(request, 'profiles/skillGroupDetail.html', {'c':club})
+def join(request, c):
+    return render(request, 'profiles/skillGroupDetail.html', {'c':c})
 
 
 def register(request):

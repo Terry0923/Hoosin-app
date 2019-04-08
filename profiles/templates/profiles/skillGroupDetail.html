@@ -28,7 +28,7 @@
     </ul>
 
     <h6> Recent Posts: </h6>
-    <ul class="list-group" style="margin-bottom: 15px;">
+    <ul class="list-group" style="margin-bottom: 50px;">
         {% for post in c.post_set.all %}
         <li class="list-group-item"> <h6>{{ post.headline}}</h6> {{ post.body }}
              <small><br><br>{{ post.type }} posted on {{ post.date }} </small>
