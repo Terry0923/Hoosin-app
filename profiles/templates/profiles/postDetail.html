@@ -1,0 +1,6 @@
+{% extends 'profiles/base.html' %}
+{% block content %}
+    <h3 class="border-bottom" style="padding: 5px;">{{post.headline}}</h3>
+    <p>{{ post.body }}</p>
+    <small>{{ post.type }} made on {{ post.date }}</small>
+{% endblock %}

@@ -12,6 +12,7 @@ urlpatterns = [
     path('clubs/<str:name>/', views.skillGroupDetail),
     path('clubs/<str:name>/<str:user>/join', views.join),
     path('clubs/<str:name>/<str:user>/leave', views.leave),
+    path('clubs/<str:name>/<int:pk>/', views.postDetail),
     path('clubs/<str:name>/add-post/', views.addPost, name='add-post'),
     url(r'^search-form/$', views.search_form, name='search-form'),
     url(r'^search/$', views.search, name='search-results'),

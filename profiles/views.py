@@ -62,6 +62,14 @@ def detail(request, username):
     return render(request, 'profiles/detail.html', {'uid':uid})
 
 
+def postDetail(request, name, pk):
+    try:
+        post = Post.objects.get(pk=pk)
+    except Post.DoesNotExist:
+        raise Http404('User not found')
+    return render(request, 'profiles/postDetail.html', {'post':post})
+
+
 def skillGroupDetail(request, name):
     try:
         c = Club.objects.get(name=name)
