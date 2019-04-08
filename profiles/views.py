@@ -1,20 +1,43 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse, Http404
-from .models import Student, Club, Profile
+from django.shortcuts import render,redirect, get_object_or_404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from .models import Student, Club, Profile, Post
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
 from itertools import chain
-
+from django.utils import timezone
+from django.urls import reverse
 
 def home(request):
     return render(request, 'profiles/home.html')
 
 
+def addPost(request, name):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PostForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            data = request.POST.copy()
+            c = Club.objects.get(name=name)
+            if name == c.name:
+                post = Post(headline = data.get('headline'), date=timezone.now(), type = data.get('type'), body = data.get('body'), club = c)
+                post.save()
+                # redirect to a new URL:
+                return HttpResponseRedirect('/profiles/clubs/')
+
+        # if a GET (or any other method) we'll create a blank form
+    else:
+        form = PostForm()
+
+    return render(request, 'profiles/post.html', {'form': form})
+
 def about(request):
     return render(request, 'profiles/about.html')
+
 
 def studentindex(request):
     #student_list = Student.objects.order_by('username')
@@ -37,6 +60,23 @@ def detail(request, username):
     except User.DoesNotExist:
         raise Http404('User not found')
     return render(request, 'profiles/detail.html', {'uid':uid})
+
+
+def skillGroupDetail(request, name):
+    try:
+        c = Club.objects.get(name=name)
+    except Club.DoesNotExist:
+        raise Http404('Club not found')
+    return render(request, 'profiles/skillGroupDetail.html', {'c':c})
+
+
+def join(request, c, user):
+    club, created = Club.objects.get(name=c.name, description=c.description)
+    club.save()
+    u = user
+    u.save()
+    club.users.add(u)
+    return render(request, 'profiles/skillGroupDetail.html', {'c':club})
 
 
 def register(request):
@@ -65,7 +105,7 @@ def search(request):
         return render(request, 'profiles/search_results.html',
                       {'user_matches': users, 'club_matches': clubs, 'query': q})
     else:
-        return HttpResponse('Please submit a search term.')
+        return render(request, 'profiles/search_form.html')
 
 @login_required
 def profile(request):

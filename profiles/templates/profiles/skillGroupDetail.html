@@ -1,0 +1,40 @@
+{% extends 'profiles/base.html' %}
+{% block content %}
+    <!--<p> you're logged in as {{ user }} </p>-->
+
+    <h2 name="">{{ c.name }}</h2>
+    <p class="border-bottom" style="padding-bottom: 15px;">{{ c.description}}</p>
+
+    {% if user in c.users.all %}
+        <p> You're a member of this club! Consider posting to contribute to the discussion.</p>
+        <form action="add-post/" style="display: inline;" >
+            <input class="btn btn-outline-info" type="submit" value="Add a post" style="margin-bottom: 30px !important;/>
+        </form>
+        <form action="" style="display: inline;" >
+            <input class="btn btn-outline-info" type="submit" value="Leave Group" style="margin-bottom: 30px !important;" />
+        </form>
+    {% else %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <input class="btn btn-outline-info" type="submit" value="Join Group">
+    </form>
+    {% endif %}
+
+    <h6> Members ({{ c.users.count }}): </h6>
+    <ul class="list-group" style="margin-bottom: 15px;">
+    {% for member in c.users.all %}
+    <li class="list-group-item"> <a href="/profiles/students/{{ member.username }}">{{ member.username}} </a></li>
+    {% endfor %}
+    </ul>
+
+    <h6> Recent Posts: </h6>
+    <ul class="list-group" style="margin-bottom: 15px;">
+        {% for post in c.post_set.all %}
+        <li class="list-group-item"> <h6>{{ post.headline}}</h6> {{ post.body }}
+             <small><br><br>{{ post.type }} posted on {{ post.date }} </small>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

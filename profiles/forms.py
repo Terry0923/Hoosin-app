@@ -1,6 +1,7 @@
 
 from django import forms
 from django.contrib.auth.models import User
+from .models import Post
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from django.core.validators import EmailValidator
@@ -32,6 +33,10 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['year','major']
 
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['headline', 'body', 'type']
 
 '''
 class ProfileUpdateForm(forms.ModelForm):
