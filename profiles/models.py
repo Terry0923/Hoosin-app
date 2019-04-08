@@ -44,9 +44,8 @@ class Profile(models.Model):
 class Club(models.Model):
     name = models.CharField(max_length=150)
     description = models.CharField(max_length=350, default="a club on Grounds")
-    users = models.ManyToManyField(User, default=[])
     image = models.ImageField(default='default.jpg', upload_to='club_pics')
-
+    users = models.ManyToManyField(User, default=[])
     def __str__(self):
         return self.name
 
@@ -65,6 +64,7 @@ class Post(models.Model):
         default="announcement")
     date = models.DateTimeField()
     club = models.ForeignKey(Club, default=None, on_delete=models.CASCADE)
+    # likes = models.IntegerField(default = 0)
 
 
 def save(self, force_insert=False, force_update=False, using=None):

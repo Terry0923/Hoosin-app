@@ -70,8 +70,20 @@ def skillGroupDetail(request, name):
     return render(request, 'profiles/skillGroupDetail.html', {'c':c})
 
 
-def join(request, c):
-    return render(request, 'profiles/skillGroupDetail.html', {'c':c})
+def join(request, name, user):
+    c = Club.objects.get(name=name)
+    u = User.objects.get(username=user)
+    c.users.add(u)
+    c.save()
+    return redirect('/profiles/clubs/'+name)
+
+
+def leave(request, name, user):
+    c = Club.objects.get(name=name)
+    u = User.objects.get(username=user)
+    c.users.remove(u)
+    c.save()
+    return redirect('/profiles/clubs/'+name)
 
 
 def register(request):
