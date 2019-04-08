@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404
-from .models import Student, Club, Profile
+from .models import Student, Course, Club, Profile
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django import forms
@@ -26,6 +26,12 @@ def studentindex(request):
     return render(request, 'profiles/studentIndex.html', context)
 
 
+def courseindex(request):
+    course_list = Course.objects.order_by('title')
+    context = {'course_list': course_list}
+    return render(request, 'profiles/courseIndex.html', context)
+
+
 def clubindex(request):
     club_list = Club.objects.order_by('name')
     context = {'club_list': club_list}
@@ -38,6 +44,14 @@ def detail(request, username):
     except User.DoesNotExist:
         raise Http404('User not found')
     return render(request, 'profiles/detail.html', {'uid':uid})
+
+
+def course_detail(request, title):
+    try:
+        uid = Course.objects.get(title=title)
+    except Course.DoesNotExist:
+        raise Http404('Course not found')
+    return render(request, 'profiles/course_detail.html', {'uid':uid})
 
 
 def club_detail(request, name):
@@ -63,6 +77,23 @@ def register(request):
 
 def search_control(request):
     return render(request, 'profiles/search_control.html')
+
+
+def course_search_form(request):
+    return render(request, 'profiles/course_search_form.html')
+
+
+def course_search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        # users = User.objects.filter(username__icontains=q)
+        course_title = Course.objects.filter(title__icontains=q)
+        course_desc = Course.objects.filter(description__icontains=q)
+        courses = list(dict.fromkeys(list(chain(course_title, course_desc))))
+        return render(request, 'profiles/search_results.html',
+                      {'matches': courses, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
 
 
 def club_search_form(request):
