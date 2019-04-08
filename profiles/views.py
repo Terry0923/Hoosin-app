@@ -89,11 +89,10 @@ def student_search(request):
     if 'schoolInput' in request.GET and request.GET['schoolInput']:
         schoolInput = request.GET['schoolInput']
         nameInput = request.GET['nameInput']
-        school_name = Profile.objects.filter(school__icontains=schoolInput)
+        school_name = Profile.objects.filter(school__icontains=schoolInput).select_related('user')
         # user_name = school_name.
         students = list(dict.fromkeys(list(chain(school_name))))
         return render(request, 'profiles/search_student_results.html',
-                        {'matches': students, 'query': nameInput},
                       {'matches': students, 'query': schoolInput})
     else:
         return HttpResponse('Please submit a search term.')
