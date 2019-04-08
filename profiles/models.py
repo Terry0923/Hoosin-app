@@ -23,7 +23,8 @@ class Student(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    bio = models.TextField(default="some information about the student")
 
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
@@ -44,6 +45,7 @@ class Club(models.Model):
     name = models.CharField(max_length=150)
     description = models.CharField(max_length=350, default="a club on Grounds")
     users = models.ManyToManyField(User, default=[])
+    image = models.ImageField(default='default.jpg', upload_to='club_pics')
 
     def __str__(self):
         return self.name
@@ -52,6 +54,8 @@ class Club(models.Model):
 class Post(models.Model):
     headline = models.CharField(max_length=250)
     body = models.TextField(default="here is some post body text")
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
     TYPE_CHOICES = [("event", "event"),
                     ("announcement", "announcement"),
                     ("misc", "misc")]

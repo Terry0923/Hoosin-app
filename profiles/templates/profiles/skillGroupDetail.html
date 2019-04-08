@@ -1,9 +1,12 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
     <!--<p> you're logged in as {{ user }} </p>-->
-
+    <div class="col-md-6" style="margin-bottom: 20px !important;text-align: center; vertical-align: top;display: inline-block; width: 49%;">
+        <img src="/media/{{c.image}}" style="width: 220px; height: 220px; border-radius: 110px;">
+    </div>
+    <div style="width: 49%; display: inline-block !important;">
     <h2 name="">{{ c.name }}</h2>
-    <p class="border-bottom" style="padding-bottom: 15px;">{{ c.description}}</p>
+    <p class="border-bottom" style="padding-bottom: 5px;">{{ c.description}}</p>
 
     {% if user in c.users.all %}
         <p> You're a member of this club! Consider posting to contribute to the discussion.</p>
@@ -19,6 +22,7 @@
         <input class="btn btn-outline-info" type="submit" value="Join Group">
     </form>
     {% endif %}
+    </div>
 
     <h6> Members ({{ c.users.count }}): </h6>
     <ul class="list-group" style="margin-bottom: 15px;">
