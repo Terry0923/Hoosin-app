@@ -7,6 +7,7 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
 from itertools import chain
+from django.db.models import Q
 
 
 def home(request):
@@ -68,6 +69,9 @@ def search_control(request):
 def club_search_form(request):
     return render(request, 'profiles/club_search_form.html')
 
+def student_search_form(request):
+    return render(request, 'profiles/search_student.html')
+
 
 def club_search(request):
     if 'q' in request.GET and request.GET['q']:
@@ -81,6 +85,18 @@ def club_search(request):
     else:
         return HttpResponse('Please submit a search term.')
 
+def student_search(request):
+    if 'schoolInput' in request.GET and request.GET['schoolInput']:
+        schoolInput = request.GET['schoolInput']
+        nameInput = request.GET['nameInput']
+        school_name = Profile.objects.filter(school__icontains=schoolInput)
+        # user_name = school_name.
+        students = list(dict.fromkeys(list(chain(school_name))))
+        return render(request, 'profiles/search_student_results.html',
+                        {'matches': students, 'query': nameInput},
+                      {'matches': students, 'query': schoolInput})
+    else:
+        return HttpResponse('Please submit a search term.')
 
 @login_required
 def profile(request):

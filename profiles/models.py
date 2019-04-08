@@ -72,8 +72,23 @@ class Profile(models.Model):
         max_length=6,
         choices=YEAR_CHOICES,
         default="first")
+
     major = models.CharField(max_length=150, default="undeclared")
 
+    SCHOOL_CHOICES = [
+    ("School of Nursing","School of Nursing"),
+    ("School of Medicine","School of Medicine"),
+    ("School of Law","School of Law"),
+    ("School of Engineering and Applied Science","School of Engineering and Applied Science"),
+    ("Curry School of Education and Human Development","Curry School of Education and Human Development"),
+    ("Darden School of Business","Darden School of Business"),
+    ("Mcintire School of Commerce","Mcintire School of Commerce"),
+    ("School of Architecture","School of Architecture"),
+    ]
+    school = models.CharField(
+        max_length=50,
+        choices=SCHOOL_CHOICES,
+        default ="School of Engineering and Applied Science")
     def __str__(self):
         return f'{self.user.username} Profile'
 

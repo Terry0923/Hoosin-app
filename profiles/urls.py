@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^search-control/$', views.search_control, name='search-control'),
     url(r'^club-search-form/$', views.club_search_form, name='club-search-form'),
     url(r'^club-search/$', views.club_search, name='club-search'),
+    path('student-search/',views.student_search, name='student-search'),
+    path('student-search-form/',views.student_search_form, name='student-search-form'),
 ]

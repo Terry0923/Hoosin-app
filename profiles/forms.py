@@ -30,7 +30,7 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['year','major']
+        fields = ['year','major','school']
 
 
 '''
