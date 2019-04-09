@@ -40,8 +40,8 @@ def about(request):
 
 
 def studentindex(request):
-    #student_list = Student.objects.order_by('username')
-    student_list = User.objects.all()#values_list('username', flat=True)
+    student_list = User.objects.order_by('username')
+    # student_list = User.objects.all()#values_list('username', flat=True)
     context = {
         'student_list': student_list
     }
@@ -91,7 +91,26 @@ def leave(request, name, user):
     u = User.objects.get(username=user)
     c.users.remove(u)
     c.save()
+    for pst in c.post_set.all():
+        if u.profile in pst.profile.all():
+            pst.profile.remove(u.profile)
     return redirect('/profiles/clubs/'+name)
+
+
+def like(request, name, pk):
+    p = Post.objects.get(pk=pk)
+    prof = request.user.profile
+    p.profile.add(prof)
+    p.save()
+    return redirect('/profiles/clubs/'+name+'/')
+
+
+def unlike(request, name, pk):
+    p = Post.objects.get(pk=pk)
+    prof = request.user.profile
+    p.profile.remove(prof)
+    p.save()
+    return redirect('/profiles/clubs/'+name+'/')
 
 
 def register(request):

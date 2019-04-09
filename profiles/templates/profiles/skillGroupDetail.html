@@ -1,4 +1,5 @@
 {% extends 'profiles/base.html' %}
+{% load static %}
 {% block content %}
     <!--<p> you're logged in as {{ user }} </p>-->
     <div class="col-md-6" style="margin-bottom: 20px !important;text-align: center; vertical-align: top;display: inline-block; width: 49%;">
@@ -9,15 +10,18 @@
     <p class="border-bottom" style="padding-bottom: 5px;">{{ c.description}}</p>
 
     {% if user in c.users.all %}
-        <p> You're a member of this club! Consider posting to contribute to the discussion.</p>
-        <form action="add-post/" style="display: inline;" >
-            <input class="btn btn-outline-info" type="submit" value="Add a post" style="margin-bottom: 30px !important;/>
-        </form>
-        <form action=">
-        </form>
-        <form action="{{user}}/leave" style="display: inline;" >
-            <input class="btn btn-outline-info" type="submit" value="Leave Group" style="margin-bottom: 30px !important;" />
-        </form>
+        <p> You're a member of this skill group! Post or like to contribute to the discussion.</p>
+        <div style="margin-bottom: 30px !important">
+            <form action="add-post/" style="display: inline;" >
+                <input class="btn btn-outline-info" type="submit" value="Add a post" >
+            </form>
+            <form class="hover" action="{{user}}/leave" style="display: inline;" >
+                <input class="btn btn-outline-info" type="submit" value="Leave Group" />
+                <span class="message" style="padding-top: 15px;">
+                    Are you sure? You'll be unable to post, and your likes will be removed!
+                </span>
+            </form>
+        </div>
     {% else %}
     <form action="{{user}}/join" method="post">
         {% csrf_token %}
@@ -29,7 +33,7 @@
     <h6> Members ({{ c.users.count }}): </h6>
     <ul class="list-group" style="margin-bottom: 15px;">
     {% for member in c.users.all %}
-    <li class="list-group-item"> <a href="/profiles/students/{{ member.username }}">{{ member.username}} </a></li>
+    <li class="list-group-item"> <h6><a href="/profiles/students/{{ member.username }}">{{ member.username}} </a></h6></li>
     {% endfor %}
     </ul>
 
@@ -37,7 +41,37 @@
     <ul class="list-group" style="margin-bottom: 50px;">
         {% for post in c.post_set.all %}
         <li class="list-group-item"><a href="{{post.pk}}"> <h6>{{ post.headline}}</h6> </a>{{ post.body }}
-             <small><br><br>{{ post.type }} posted on {{ post.date }} </small>
+            {% if post.type == 'announcement' or post.type == 'misc' %}
+             <small><br><br>{{ post.type }} posted on {{ post.date }} | {{ post.profile.count}} like(s)</small>
+            {% endif %}
+            {% if post.type == 'event' %}
+             <small><br><br>{{ post.type }} posted on {{ post.date }} | {{ post.profile.count}} attending</small>
+            {% endif %}
+            <div style="position: absolute; right: 20px; bottom: 10px;">
+                {% if user in c.users.all %}
+                {% if post.type == 'announcement' or post.type == 'misc' %}
+                <form style="display: inline-block; margin: 2px" action="{{post.pk}}/like" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-info" type="submit" value="Like">
+                </form>
+                <form style="display: inline-block; margin: 2px" action="{{post.pk}}/unlike" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-info" type="submit" value="Unlike">
+                </form>
+                {% endif %}
+
+                {% if post.type == 'event' %}
+                <form style="display: inline-block; margin: 2px" action="{{post.pk}}/like" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-info" type="submit" value="Attend">
+                </form>
+                <form style="display: inline-block; margin: 2px" action="{{post.pk}}/unlike" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-info" type="submit" value="Decline">
+                </form>
+                {% endif %}
+                {% endif %}
+            </div>
         </li>
         {% endfor %}
     </ul>

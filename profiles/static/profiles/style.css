@@ -1,3 +1,31 @@
+
+.likelist{
+    display: none;
+}
+
+.message{
+    display: none;
+}
+
+.hover:hover .likelist{
+    display: inline;
+}
+
+.hover:active .likelist {
+    display: inline;
+}
+
+.hover:hover .message{
+    display: block;
+}
+
+.hover:active .message {
+    display: block;
+
+}
+
+
+
 .splash {
     width: 100%;
     height: 100%;

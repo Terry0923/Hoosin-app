@@ -54,6 +54,7 @@ class Post(models.Model):
     headline = models.CharField(max_length=250)
     body = models.TextField(default="here is some post body text")
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    profile = models.ManyToManyField(Profile, default=[])
 
     TYPE_CHOICES = [("event", "event"),
                     ("announcement", "announcement"),
@@ -64,7 +65,6 @@ class Post(models.Model):
         default="announcement")
     date = models.DateTimeField()
     club = models.ForeignKey(Club, default=None, on_delete=models.CASCADE)
-    # likes = models.IntegerField(default = 0)
 
 
 def save(self, force_insert=False, force_update=False, using=None):

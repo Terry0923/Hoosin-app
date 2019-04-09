@@ -1,6 +1,34 @@
 {% extends 'profiles/base.html' %}
+{% load static %}
 {% block content %}
+
     <h3 class="border-bottom" style="padding: 5px;">{{post.headline}}</h3>
     <p>{{ post.body }}</p>
-    <small>{{ post.type }} made on {{ post.date }}</small>
+<small>{{ post.type }} made on {{ post.date }} |
+    {% if post.type == 'announcement' or post.type == 'misc' %}
+    <span class="hover"><a href="">{{ post.profile.count }} like(s)</a>
+
+        <p class="likelist" > -
+        {% for p in post.profile.all %}
+            {{ p.user.username }},
+        {% endfor %}
+            ...
+        </p>
+    </span>
+    {% endif %}
+    {% if post.type == 'event' %}
+    <span class="hover"><a href="">{{ post.profile.count }} attending</a>
+
+        <p class="likelist" > -
+        {% for p in post.profile.all %}
+            {{ p.user.username }},
+        {% endfor %}
+            ...
+        </p>
+    </span>
+    {% endif %}
+    </small>
+
+
+
 {% endblock %}
