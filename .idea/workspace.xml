@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bff96c97-283e-4842-a473-28b8e7419804" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/media/profile_pics/important.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/media/profile_pics/important_fmx9Jgi.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/media/profile_pics/lebron_james_cavaliers._.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/profiles/templates/profiles/post.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/profiles/templates/profiles/postDetail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/profiles/templates/profiles/skillGroupDetail.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/profiles/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/profiles/static/profiles/logo2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/profiles/static/profiles/logo3.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.hoosin" afterPath="$PROJECT_DIR$/db.hoosin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/media/default.jpg" afterPath="$PROJECT_DIR$/media/default.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hoosin/settings.py" afterPath="$PROJECT_DIR$/hoosin/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/admin.py" afterPath="$PROJECT_DIR$/profiles/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/forms.py" afterPath="$PROJECT_DIR$/profiles/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/models.py" afterPath="$PROJECT_DIR$/profiles/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/static/profiles/style.css" afterPath="$PROJECT_DIR$/profiles/static/profiles/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/templates/profiles/about.html" afterPath="$PROJECT_DIR$/profiles/templates/profiles/about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/templates/profiles/base.html" afterPath="$PROJECT_DIR$/profiles/templates/profiles/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/templates/profiles/club_search_form.html" afterPath="$PROJECT_DIR$/profiles/templates/profiles/club_search_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/templates/profiles/detail.html" afterPath="$PROJECT_DIR$/profiles/templates/profiles/detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/templates/profiles/logout.html" afterPath="$PROJECT_DIR$/profiles/templates/profiles/logout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/templates/profiles/studentIndex.html" afterPath="$PROJECT_DIR$/profiles/templates/profiles/studentIndex.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/urls.py" afterPath="$PROJECT_DIR$/profiles/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles/views.py" afterPath="$PROJECT_DIR$/profiles/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
-    </list>
+    <list default="true" id="bff96c97-283e-4842-a473-28b8e7419804" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,8 +70,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/profiles/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="122" column="38" lean-forward="true" selection-start-line="122" selection-start-column="38" selection-end-line="122" selection-end-column="38" />
+            <state relative-caret-position="2444">
+              <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -594,8 +567,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/profiles/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="122" column="38" lean-forward="true" selection-start-line="122" selection-start-column="38" selection-end-line="122" selection-end-column="38" />
+        <state relative-caret-position="2444">
+          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
