@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from .models import Student, Club, Profile, Post
+from .models import Student, Club, Profile, Post, Comment
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm, CommentForm
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -35,6 +35,27 @@ def addPost(request, name):
 
     return render(request, 'profiles/post.html', {'form': form})
 
+
+def addComment(request, pk, name):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = CommentForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            data = request.POST.copy()
+            p = Post.objects.get(pk=pk)
+            c = p.club
+            comment=Comment(body=data.get('body'), date=timezone.now(), profile=request.user.profile, post=p)
+            comment.save()
+            return HttpResponseRedirect('/profiles/clubs/'+c.name+'/'+str(pk)+'/')
+
+        # if a GET (or any other method) we'll create a blank form
+    else:
+        form = CommentForm()
+
+    return render(request, 'profiles/comment.html', {'form': form})
+
 def about(request):
     return render(request, 'profiles/about.html')
 
@@ -65,9 +86,10 @@ def detail(request, username):
 def postDetail(request, name, pk):
     try:
         post = Post.objects.get(pk=pk)
+        comments = Comment.objects.filter(post = post)
     except Post.DoesNotExist:
         raise Http404('User not found')
-    return render(request, 'profiles/postDetail.html', {'post':post})
+    return render(request, 'profiles/postDetail.html', {'post':post, 'comments':comments})
 
 
 def skillGroupDetail(request, name):

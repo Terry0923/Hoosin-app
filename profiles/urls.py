@@ -16,6 +16,7 @@ urlpatterns = [
     path('clubs/<str:name>/<int:pk>/like', views.like),
     path('clubs/<str:name>/<int:pk>/unlike', views.unlike),
     path('clubs/<str:name>/add-post/', views.addPost, name='add-post'),
+    path('clubs/<str:name>/<int:pk>/add-comment/', views.addComment, name='add-comment'),
     url(r'^search-form/$', views.search_form, name='search-form'),
     url(r'^search/$', views.search, name='search-results'),
 ]

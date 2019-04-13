@@ -29,6 +29,19 @@
     {% endif %}
     </small>
 
+    <h6 style="margin-top: 15px;"> <form action="add-comment/" style="display: inline;" >
+            <input class="btn btn-outline-info" type="submit" value="Add comment" style="margin-bottom: 10px !important;">
+        </form> <br>Comments:
 
+    </h6>
+
+    <ul class="list-group" style="margin-bottom: 15px;">
+    {% for comment in comments%}
+    <li class="list-group-item">
+        <p> {{ comment.body }}</p>
+        <small>posted on {{ comment.date }}  by <a href="/profiles/students/{{ member.username }}">{{ comment.profile.user.username }} </a></small>
+    </li>
+    {% endfor %}
+    </ul>
 
 {% endblock %}

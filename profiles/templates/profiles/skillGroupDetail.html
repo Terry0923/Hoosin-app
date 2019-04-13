@@ -42,7 +42,7 @@
         {% for post in c.post_set.all %}
         <li class="list-group-item"><a href="{{post.pk}}"> <h6>{{ post.headline}}</h6> </a>{{ post.body }}
             {% if post.type == 'announcement' or post.type == 'misc' %}
-             <small><br><br>{{ post.type }} posted on {{ post.date }} | {{ post.profile.count}} like(s)</small>
+             <small><br><br>{{ post.type }} posted on {{ post.date }} | {{ post.profile.count}} like(s) </small>
             {% endif %}
             {% if post.type == 'event' %}
              <small><br><br>{{ post.type }} posted on {{ post.date }} | {{ post.profile.count}} attending</small>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 #from PIL import Image
 
 
@@ -65,6 +66,15 @@ class Post(models.Model):
         default="announcement")
     date = models.DateTimeField()
     club = models.ForeignKey(Club, default=None, on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    body = models.TextField(default="here is some comment body text", max_length=1000)
+    profile = models.ForeignKey(Profile, default=None, on_delete=models.CASCADE)
+    # each comment has only one profile that posted it, but profiles can make multiple comments
+    post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE)
+    # each comment has only one post it's associated with, but posts can have multiple comments
+    date = models.DateTimeField()
 
 
 def save(self, force_insert=False, force_update=False, using=None):
