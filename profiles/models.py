@@ -29,9 +29,10 @@ class Profile(models.Model):
                     ("looking for a study group", "looking for a study group"),
                     ("looking for a tutor", "looking for a tutor"),
                      ("available to tutor", "available to tutor")]
-    status = models.CharField(max_length=50,
-                              choices=STATUS_CHOICES,
-                              default="looking for a study buddy")
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default="looking for a study buddy")
     bio = models.TextField(default="some information about the student")
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
