@@ -201,7 +201,7 @@ def course_search(request):
         return render(request, 'profiles/search_results.html',
                       {'matches': courses, 'query': q})
     else:
-        return HttpResponse('Please submit a search term.')
+        return render(request, 'profiles/course_search_form.html')
 
 
 def club_search_form(request):
@@ -218,7 +218,7 @@ def club_search(request):
         return render(request, 'profiles/search_results.html',
                       {'matches': clubs, 'query': q})
     else:
-        return render(request, 'profiles/search_form.html')
+        return render(request, 'profiles/club_search_form.html')
 
 
 @login_required
