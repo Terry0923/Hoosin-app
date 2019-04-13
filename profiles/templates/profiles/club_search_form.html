@@ -3,11 +3,11 @@
 {% block content %}
 <html>
 <head>
-    <h2>Search</h2>
-    <p> Enter keywords to search by names and descriptions of groups on Grounds, or search by username for different students.</p>
+    <h2>Search for Skill Groups</h2>
+    <p> Enter keywords to search by names and descriptions of groups on Grounds.</p>
 </head>
 <body>
-    <form action="/profiles/search/" method="get">
+    <form action="/profiles/club-search/" method="get">
         <input class='form-control' type="text" name="q" style="margin-bottom: 10px;">
         <input class='btn btn-outline-info' type="submit" value="Search">
     </form>

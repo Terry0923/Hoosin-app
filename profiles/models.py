@@ -41,6 +41,30 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
+class Course(models.Model):
+    title = models.CharField(max_length=30)
+    description = models.CharField(max_length=350, default="a course on Grounds")
+    long_description = models.TextField(
+        default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar ipsum mattis laoreet dictum. Donec et odio ligula. Nullam et purus quam. Duis vel malesuada purus, at iaculis est. Donec eget placerat augue. Sed pharetra pellentesque augue at ultrices. Cras ac massa eleifend, blandit ligula sed, porttitor magna. Etiam massa eros, sollicitudin eu sem eget, bibendum ultrices turpis. Mauris tincidunt convallis ligula vel vehicula. Aliquam in leo vel justo rutrum tempus a fringilla ante. Proin rhoncus commodo dui, sed volutpat lorem gravida vel. Sed non lacus viverra, ultrices purus id, maximus nunc. Mauris vitae urna diam. Donec quis posuere enim. Cras a nibh porttitor, tincidunt enim nec, rhoncus nibh.")
+    '''
+    COURSE_LIST = [
+    ("CS1110",1),
+    ("CS2110",2),
+    ("CS2150",3),
+    ("CS3102",4),
+    ("CS3330",5),
+    ("CS4102",6),
+    ("CS4414",7),
+    ("CS4740",8),
+    ("CS4720",9),
+    ]'''
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('title',)
+
 
 class Club(models.Model):
     name = models.CharField(max_length=150)
