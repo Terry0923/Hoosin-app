@@ -72,13 +72,13 @@ def studentindex(request):
 def courseindex(request):
     course_list = Course.objects.order_by('title')
     context = {'course_list': course_list}
-    return render(request, 'profiles/courseIndex.html', context)
+    return render(request, 'profiles/course_index.html', context)
 
 
 def clubindex(request):
     club_list = Club.objects.order_by('name')
     context = {'club_list': club_list}
-    return render(request, 'profiles/clubIndex.html', context)
+    return render(request, 'profiles/club_index.html', context)
 
 
 def detail(request, username):
@@ -91,7 +91,7 @@ def detail(request, username):
 
 def course_detail(request, title):
     try:
-        uid = User.objects.get(title=title)
+        uid = Course.objects.get(title=title)
     except Course.DoesNotExist:
         raise Http404('Course not found')
     return render(request, 'profiles/course_detail.html', {'uid':uid})
