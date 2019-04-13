@@ -85,15 +85,16 @@ def club_search(request):
     else:
         return HttpResponse('Please submit a search term.')
 
+
 def student_search(request):
     if 'schoolInput' in request.GET and request.GET['schoolInput']:
         schoolInput = request.GET['schoolInput']
         nameInput = request.GET['nameInput']
-        school_name = Profile.objects.filter(school__icontains=schoolInput).select_related('user')
-        # user_name = school_name.
+        user_name = User.objects.filter(username__icontains=nameInput)
+        school_name = Profile.objects.filter(school__icontains=schoolInput).select_related()
         students = list(dict.fromkeys(list(chain(school_name))))
         return render(request, 'profiles/search_student_results.html',
-                      {'matches': students, 'query': schoolInput})
+                      {'matches': students, 'query': user_name})
     else:
         return HttpResponse('Please submit a search term.')
 
