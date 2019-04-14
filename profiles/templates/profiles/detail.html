@@ -5,12 +5,36 @@
         <img src="/media/{{uid.profile.image}}" style="width: 220px; height: 220px; border-radius: 110px;">
     </div>
     <div style="width: 49%; display: inline-block !important;">
+        <!-- header -->
         <h2 class="border-bottom" style="padding-bottom: 5px;">{{ uid.username }}</h2>
+        <!-- email -->
         {% if uid.email %}
-        <p>email: {{ uid.email }}</p>
+        <p><b>Email:</b> {{ uid.email }}</p>
+        {% else %}
+            <p><b>Email:</b> none</p>
         {% endif %}
-        <p>{{ uid.profile.year }} year, {{ uid.profile.major }} major</p>
+        <!-- status -->
+        {% if uid.profile.status %}
+            <p><b>Status:</b> {{ uid.profile.status }}</p>
+        {% else %}
+            <p><b>Status:</b> none</p>
+        {% endif %}
+        <!-- year -->
+        {% if uid.profile.year %}
+            <p><b>Year:</b> {{ uid.profile.year }}</p>
+        {% else %}
+            <p><b>Year:</b> unspecified</p>
+        {% endif %}
+        <!-- major-->
+        {% if uid.profile.major %}
+            <p><b>Major:</b> {{ uid.profile.major }}</p>
+        {% else %}
+            <p><b>major:</b> Undeclared</p>
+        {% endif %}
+        <!-- bio -->
+        <p><b>Bio:</b></p>
         <p> {{ uid.profile.bio}} </p>
+        <!-- friends -->
         {% if  uid != current_user.user %}
         {% if uid in current_user.friends.all %}
         <form action="{{user}}/unfollow/" method="post">

@@ -26,11 +26,18 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio = models.TextField(default="some information about the student")
+    STATUS_CHOICES = [("looking for a study buddy", "looking for a study buddy"),
+                      ("looking for a study group", "looking for a study group"),
+                      ("looking for a tutor", "looking for a tutor"),
+                      ("available to tutor", "available to tutor")]
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default="looking for a study buddy")
     friends = models.ManyToManyField(User, related_name="Friend")
-
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
-                    ("third", 3 ),
+                    ("third", 3),
                     ("fourth", 4)]
     year = models.CharField(
         max_length=6,
