@@ -1,0 +1,15 @@
+{% extends 'profiles/base.html' %}
+{% block content %}
+    <h2>Your Courses</h2>
+{% if club_list%}
+    <ul class="list-group">
+    {% for c in club_list %}
+        <li class="list-group-item">
+            <h5><a href="/profiles/clubs/{{ c.name }}">{{ c.name }}</a></h5>
+            <p>{{ c.description }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't joined any skill groups on Hoosin. </p>
+{% endif %}
+{% endblock %}

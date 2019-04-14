@@ -14,6 +14,15 @@ def home(request):
     return render(request, 'profiles/home.html')
 
 
+def dashboard(request):
+    # should get profile from user, and return all of the clubs a student is in, all posts from clubs they are in
+    club_list = Club.objects.filter(users=request.user)
+    # club_list = Club.objects.all()
+    context = {
+        'club_list': club_list,
+    }
+    return render(request, 'profiles/dashboard.html', context)
+
 def addPost(request, name):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:

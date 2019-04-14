@@ -6,6 +6,7 @@ from . import views
 
 app_name = 'profiles'
 urlpatterns = [
+    path('', views.dashboard, name='dashboard'),
     path('students/', views.studentindex, name='student-index'),
     path('courses/', views.courseindex, name='course-index'),
     path('clubs/', views.clubindex, name='club-index'),
