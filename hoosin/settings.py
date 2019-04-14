@@ -36,7 +36,7 @@ LOGIN_URL = '/auth/login/google-oauth2/'
 
 LOGOUT_REDIRECT_URL = ''
 
-LOGIN_REDIRECT_URL = '/profiles/students'
+LOGIN_REDIRECT_URL = '/profiles'
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/hoosin/error/'
 
@@ -204,6 +204,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

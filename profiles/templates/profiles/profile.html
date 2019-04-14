@@ -7,13 +7,34 @@
 
         <div class="media-body">
           <legend class="border-bottom mb-4">Current Profile</legend>
-          <h5 class="account-heading" style="margin-top: -10px;">{{ user.username }}</h5>
+             <div class="col-md-6" style="margin-bottom: 20px !important;text-align: center; vertical-align: top;display: inline-block; width: 49%;">
+        <img src="/media/{{user.profile.image}}" style="width: 220px; height: 220px; border-radius: 110px;">
+    </div>
+            <div style="width: 49%; display: inline-block !important;">
+          <h2 class="account-heading">{{ user.username }}</h2>
             {% if user.email %}
                 <p class="text-secondary">email: {{ user.email }}</p>
             {% endif %}
             {% if user.profile.year and user.profile.major %}
                 <p class="text-secondary">{{ user.profile.year }} year, {{ user.profile.major }} major</p>
             {% endif %}
+            {% if user.profile.bio %}
+                <p class="text-secondary"> {{ user.profile.bio}} </p>
+            {% endif %}
+            <!--<h6>All friends </h6>-->
+            <!--{% if friend_list %}-->
+            <!--<ul class="list-group">-->
+            <!--{% for friend in friend_list %}-->
+
+                <!--<li class="list-group-item">-->
+                    <!--<a href="/profiles/students/{{ friend.username }}">{{ friend.username }}</a>-->
+                    <!--</li>-->
+            <!--{% endfor %}-->
+            <!--</ul>-->
+            <!--{% else %}-->
+            <!--you have no friends-->
+            <!--{% endif %}-->
+            </div>
         </div>
       </div>
       <form method="POST" enctype="multipart/form-data">

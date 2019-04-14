@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Student, Course, Club, Profile, Post, Comment
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm, CommentForm
 from django import forms
 from django.contrib import messages
@@ -12,6 +13,27 @@ from django.urls import reverse
 
 def home(request):
     return render(request, 'profiles/home.html')
+
+
+def dashboard(request):
+    if request.user.is_anonymous:
+        return redirect('home')
+    else:
+        # should get profile from user, and return all of the clubs a student is in, all posts from clubs they are in
+        club_list = Club.objects.filter(users=request.user)
+        clubs_to_join = Club.objects.order_by('?')[:3]          # chooses 5 random clubs
+        friend_list = set(request.user.profile.friends.all())
+        friends_to_make = User.objects.order_by('?')[:3]
+        if len(club_list) != 0:
+            c = club_list.first()
+            friends_to_make = User.objects.filter(club=c).order_by('?')[:3]
+        context = {
+            'club_list': club_list,
+            'clubs_to_join': clubs_to_join,
+            'friend_list': friend_list,
+            'friends_to_make': friends_to_make,
+        }
+        return render(request, 'profiles/dashboard.html', context)
 
 
 def addPost(request, name):
@@ -61,8 +83,7 @@ def about(request):
 
 
 def studentindex(request):
-    student_list = User.objects.order_by('username')
-    # student_list = User.objects.all()#values_list('username', flat=True)
+    student_list = User.objects.all()#values_list('username', flat=True)
     context = {
         'student_list': student_list
     }
@@ -84,9 +105,10 @@ def clubindex(request):
 def detail(request, username):
     try:
         uid = User.objects.get(username=username)
+        cu = Profile.objects.get(user=request.user)
     except User.DoesNotExist:
         raise Http404('User not found')
-    return render(request, 'profiles/detail.html', {'uid':uid})
+    return render(request, 'profiles/detail.html', {'uid':uid, 'current_user':cu})
 
 
 def course_detail(request, title):
@@ -132,6 +154,19 @@ def leave(request, name, user):
             pst.profile.remove(u.profile)
     return redirect('/profiles/clubs/'+name)
 
+def follow(request, username, user):
+    cu = Profile.objects.get(user=request.user)
+    ou = User.objects.get(username=username)
+    cu.friends.add(ou)
+    cu.save()
+    return redirect('/profiles/students/'+username)
+
+def unfollow(request, username, user):
+    cu = Profile.objects.get(user=request.user)
+    ou = User.objects.get(username=username)
+    cu.friends.remove(ou)
+    cu.save()
+    return redirect('/profiles/students/'+username)
 
 def like(request, name, pk):
     p = Post.objects.get(pk=pk)
@@ -224,6 +259,8 @@ def club_search(request):
 @login_required
 def profile(request):
     user = Profile.objects.get_or_create(user=request.user)
+    cu = Profile.objects.get(user=request.user)
+    friends = cu.friends.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -241,7 +278,8 @@ def profile(request):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'friend_list':friends,
     }
 
     return render(request, 'profiles/profile.html', context)

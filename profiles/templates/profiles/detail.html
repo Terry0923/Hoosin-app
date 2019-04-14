@@ -7,6 +7,7 @@
     <div style="width: 49%; display: inline-block !important;">
         <!-- header -->
         <h2 class="border-bottom" style="padding-bottom: 5px;">{{ uid.username }}</h2>
+<<<<<<< HEAD
         <!-- email -->
         {% if uid.email %}
         <p><b>Email:</b> {{ uid.email }}</p>
@@ -34,5 +35,18 @@
         <!-- bio -->
         <p><b>Bio:</b></p>
         <p> {{ uid.profile.bio}} </p>
+        {% if  uid != current_user.user %}
+        {% if uid in current_user.friends.all %}
+        <form action="{{user}}/unfollow/" method="post">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" value="Unfollow"></form>
+        {% else %}
+        <form action="{{user}}/follow/" method="post">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" value="Follow"></form>
+            <!--  -->
+              {% endif %}
+              {% endif %}
     </div>
+
 {% endblock %}

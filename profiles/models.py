@@ -34,6 +34,7 @@ class Profile(models.Model):
         choices=STATUS_CHOICES,
         default="looking for a study buddy")
     bio = models.TextField(default="some information about the student")
+    friends = models.ManyToManyField(User, related_name="Friend")
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
                     ("third", 3),
