@@ -35,6 +35,7 @@
         <!-- bio -->
         <p><b>Bio:</b></p>
         <p> {{ uid.profile.bio}} </p>
+        <!-- friends -->
         {% if  uid != current_user.user %}
         {% if uid in current_user.friends.all %}
         <form action="{{user}}/unfollow/" method="post">
