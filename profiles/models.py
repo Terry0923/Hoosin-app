@@ -26,6 +26,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     bio = models.TextField(default="some information about the student")
+    friends = models.ManyToManyField(User, related_name="Friend")
 
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),

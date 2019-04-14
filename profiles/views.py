@@ -61,8 +61,7 @@ def about(request):
 
 
 def studentindex(request):
-    student_list = User.objects.order_by('username')
-    # student_list = User.objects.all()#values_list('username', flat=True)
+    student_list = User.objects.all()#values_list('username', flat=True)
     context = {
         'student_list': student_list
     }
@@ -84,9 +83,10 @@ def clubindex(request):
 def detail(request, username):
     try:
         uid = User.objects.get(username=username)
+        cu = Profile.objects.get(user=request.user)
     except User.DoesNotExist:
         raise Http404('User not found')
-    return render(request, 'profiles/detail.html', {'uid':uid})
+    return render(request, 'profiles/detail.html', {'uid':uid, 'current_user':cu})
 
 
 def course_detail(request, title):
@@ -132,6 +132,19 @@ def leave(request, name, user):
             pst.profile.remove(u.profile)
     return redirect('/profiles/clubs/'+name)
 
+def follow(request, username, user):
+    cu = Profile.objects.get(user=request.user)
+    ou = User.objects.get(username=username)
+    cu.friends.add(ou)
+    cu.save()
+    return redirect('/profiles/students/'+username)
+
+def unfollow(request, username, user):
+    cu = Profile.objects.get(user=request.user)
+    ou = User.objects.get(username=username)
+    cu.friends.remove(ou)
+    cu.save()
+    return redirect('/profiles/students/'+username)
 
 def like(request, name, pk):
     p = Post.objects.get(pk=pk)
@@ -224,6 +237,8 @@ def club_search(request):
 @login_required
 def profile(request):
     user = Profile.objects.get_or_create(user=request.user)
+    cu = Profile.objects.get(user=request.user)
+    friends = cu.friends.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -241,7 +256,8 @@ def profile(request):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'friend_list':friends,
     }
 
     return render(request, 'profiles/profile.html', context)

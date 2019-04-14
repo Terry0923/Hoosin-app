@@ -14,6 +14,19 @@
             {% if user.profile.year and user.profile.major %}
                 <p class="text-secondary">{{ user.profile.year }} year, {{ user.profile.major }} major</p>
             {% endif %}
+            {% if friend_list %}
+            <h2>All friends </h2>
+            <ul class="list-group">
+            {% for friend in friend_list %}
+
+                <li class="list-group-item">
+                    <h5><a href="/profiles/students/{{ friend.username }}">{{ friend.username }}</a></h5>
+                    </li>
+            {% endfor %}
+            </ul>
+            {% else %}
+            you have no friends
+            {% endif %}
         </div>
       </div>
       <form method="POST" enctype="multipart/form-data">
