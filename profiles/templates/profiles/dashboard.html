@@ -1,15 +1,71 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-    <h2>Your Courses</h2>
-{% if club_list%}
-    <ul class="list-group">
-    {% for c in club_list %}
-        <li class="list-group-item">
-            <h5><a href="/profiles/clubs/{{ c.name }}">{{ c.name }}</a></h5>
-            <p>{{ c.description }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>You haven't joined any skill groups on Hoosin. </p>
-{% endif %}
+    <div >
+        <h2> Welcome to Hoosin, <a href="/profiles/students/{{ request.user.username }}">{{request.user}}!</a></h2>
+        <p class="intro border-bottom"> This is your dashboard - where you'll see skill groups you've expressed interest in on Grounds,
+            profiles of people that you follow, and more. </p>
+    </div>
+    <h5>Your Skill Groups</h5>
+    {% if club_list%}
+        <ul class="list-group">
+        {% for c in club_list %}
+            <li class="list-group-item">
+                <img src="/media/{{c.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
+                <h5><a href="/profiles/clubs/{{ c.name }}">{{ c.name }}</a></h5>
+                <p>{{ c.description }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't joined any skill groups on Hoosin. To get started, click "Skill Groups" above, or check out some featured clubs on Grounds below.</p>
+    {% endif %}
+    {% if clubs_to_join%}
+        <h5 style="margin-top: 25px;"> Featured Skill Groups</h5>
+        <div class="container">
+            <div class="row">
+            {% for cl in clubs_to_join%}
+                <div class=" col-sm-4" style="border: 1px solid lightgray; border-radius: 8px; padding: 15px !important;">
+
+                    <img src="/media/{{cl.image}}" style="width: 60%; margin-right: 20% !important; margin-left: 20% !important; margin-bottom: 10px;height: auto; border-radius: 110px;">
+
+                    <h5><a href="/profiles/clubs/{{ cl.name }}">{{ cl.name|truncatechars:20}}</a></h5>
+                    <p>{{ cl.description|truncatechars:50}}</div>
+            {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        {% endif %}
+
+    <h5 style="margin-top: 25px;">Your Friends</h5>
+    {% if friend_list%}
+        <ul class="list-group">
+        {% for f in friend_list %}
+            <li class="list-group-item">
+                <img src="/media/{{f.profile.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
+                <h5><a href="/profiles/students/{{ f.username }}">{{ f.username }}</a></h5>
+                <p>{{ f.profile.year }} year, {{ f.profile.major }} major</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+    <p>You don't follow anyone on Hoosin. To get started, click "Students" above or check out recommended profiles to follow (either featured students or members of skill groups you're a part of).</p>
+    {% endif %}
+
+    {% if friends_to_make%}
+        <h5 style="margin-top: 25px;"> Featured Students</h5>
+        <div class="container">
+            <div class="row">
+            {% for cl in friends_to_make%}
+                <div class=" col-sm-4" style="border: 1px solid lightgray; border-radius: 8px; padding: 15px !important;">
+
+                    <img src="/media/{{cl.profile.image}}" style="width: 60%; margin-right: 20% !important; margin-left: 20% !important; margin-bottom: 10px;height: auto; border-radius: 110px;">
+
+                    <h5><a href="/profiles/students/{{ cl.username }}">{{ cl.username|truncatechars:20}}</a></h5>
+                    <p>{{ cl.profile.bio|truncatechars:50}}</div>
+            {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        {% endif %}
+
+    <div style="height: 50px;"></div>
+
 {% endblock %}
