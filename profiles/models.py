@@ -35,6 +35,21 @@ class Profile(models.Model):
         choices=STATUS_CHOICES,
         default="looking for a study buddy")
     friends = models.ManyToManyField(User, related_name="Friend")
+    SCHOOL_CHOICES = [
+    ("School of Nursing","School of Nursing"),
+    ("College of Arts and Sciences", "College of Arts and Sciences"),
+    ("School of Medicine","School of Medicine"),
+    ("School of Law","School of Law"),
+    ("School of Engineering and Applied Science","School of Engineering and Applied Science"),
+    ("Curry School of Education and Human Development","Curry School of Education and Human Development"),
+    ("Darden School of Business","Darden School of Business"),
+    ("Mcintire School of Commerce","Mcintire School of Commerce"),
+    ("School of Architecture","School of Architecture"),
+    ]
+    school = models.CharField(
+        max_length=50,
+        choices=SCHOOL_CHOICES,
+        default ="School of Engineering and Applied Science")
     YEAR_CHOICES = [("first", 1),
                     ("second", 2),
                     ("third", 3),

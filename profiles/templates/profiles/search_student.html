@@ -1,0 +1,38 @@
+{% extends 'profiles/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<head>
+    <h2>Search for Students</h2>
+</head>
+<body>
+      <form action="/profiles/student-search/" method="get">
+        <!-- <input class='form-control' type="text" name="q" style="margin-bottom: 10px;"> -->
+        <input type="text" class="form-control" name ="nameInput" id="name" placeholder="name" style="margin-bottom: 10px;">
+        <input class="awesomplete form-control" name="schoolInput" list="mylist" placeholder="(select a school)">
+        <datalist id="mylist"" name="schoolInput">
+  	<option>School of Nursing</option>
+    <option>College of Arts and Sciences</option>
+    <option>School of Architecture</option>
+  	<option>School of Medicine</option>
+  	<option>School of Law</option>
+  	<option>School of Engineering and Applied Science</option>
+  	<option>Curry School of Education and Human Development</option>
+  	<option>Darden School of Business</option>
+  	<option>Mcintire School of Commerce</option>
+    <option>School of Architecture</option>
+</datalist>
+      </p>
+      <input type="text" name="majorInput" class="form-control" placeholder="major" style="margin-bottom: 10px;">
+      <input list="browsers" class="form-control" placeholder="(select a year)" name=yearInput>
+  <datalist id="browsers">
+    <option value="first">
+    <option value="second">
+    <option value="third">
+    <option value="fourth">
+  </datalist>
+  </p>
+          <input class='btn btn-outline-info' type="submit" value="Search">
+      </form>
+</body>
+</html>
+{% endblock %}

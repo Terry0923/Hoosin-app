@@ -25,11 +25,17 @@
         {% else %}
             <p><b>Year:</b> unspecified</p>
         {% endif %}
-        <!-- major-->
+        <!-- major -->
         {% if uid.profile.major %}
             <p><b>Major:</b> {{ uid.profile.major }}</p>
         {% else %}
-            <p><b>major:</b> Undeclared</p>
+            <p><b>major:</b> undeclared</p>
+        {% endif %}
+        <!-- school -->
+         {% if uid.profile.school %}
+            <p><b>School:</b> {{ uid.profile.school }}</p>
+        {% else %}
+            <p><b>School:</b> unspecified</p>
         {% endif %}
         <!-- bio -->
         <p><b>Bio:</b></p>
