@@ -36,7 +36,7 @@ LOGIN_URL = '/auth/login/google-oauth2/'
 
 LOGOUT_REDIRECT_URL = ''
 
-LOGIN_REDIRECT_URL = '/profiles/students'
+LOGIN_REDIRECT_URL = '/profiles'
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/hoosin/error/'
 
@@ -206,6 +206,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -215,7 +216,7 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['testcases123.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['testcases123.herokuapp.com', 'loltestcase.herokuapp.com', 'hoosin2019.herokuapp.com', 'localhost', '127.0.0.1']
 
 if '/app' in os.environ['HOME']:
     import django_heroku

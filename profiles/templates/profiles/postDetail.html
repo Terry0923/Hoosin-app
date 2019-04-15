@@ -1,0 +1,47 @@
+{% extends 'profiles/base.html' %}
+{% load static %}
+{% block content %}
+
+    <h3 class="border-bottom" style="padding: 5px;">{{post.headline}}</h3>
+    <p>{{ post.body }}</p>
+<small>{{ post.type }} made on {{ post.date }} |
+    {% if post.type == 'announcement' or post.type == 'misc' %}
+    <span class="hover"><a href="">{{ post.profile.count }} like(s)</a>
+
+        <p class="likelist" > -
+        {% for p in post.profile.all %}
+            {{ p.user.username }},
+        {% endfor %}
+            ...
+        </p>
+    </span>
+    {% endif %}
+    {% if post.type == 'event' %}
+    <span class="hover"><a href="">{{ post.profile.count }} attending</a>
+
+        <p class="likelist" > -
+        {% for p in post.profile.all %}
+            {{ p.user.username }},
+        {% endfor %}
+            ...
+        </p>
+    </span>
+    {% endif %}
+    </small>
+
+    <h6 style="margin-top: 15px;"> <form action="add-comment/" style="display: inline;" >
+            <input class="btn btn-outline-info" type="submit" value="Add comment" style="margin-bottom: 10px !important;">
+        </form> <br>Comments:
+
+    </h6>
+
+    <ul class="list-group" style="margin-bottom: 15px;">
+    {% for comment in comments%}
+    <li class="list-group-item">
+        <p> {{ comment.body }}</p>
+        <small>posted on {{ comment.date }}  by <a href="/profiles/students/{{ member.username }}">{{ comment.profile.user.username }} </a></small>
+    </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

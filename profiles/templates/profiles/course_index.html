@@ -1,0 +1,15 @@
+{% extends 'profiles/base.html' %}
+{% block content %}
+    <h2>All Courses</h2>
+{% if course_list%}
+    <ul class="list-group">
+    {% for c in course_list %}
+        <li class="list-group-item">
+            <h5><a href="/profiles/courses/{{ c.title }}">{{ c.title }}</a></h5>
+            <p>{{ c.description }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No courses exist in the system.</p>
+{% endif %}
+{% endblock %}
