@@ -93,7 +93,10 @@ def student_search(request):
         user_name = User.objects.filter(username__icontains=nameInput)
         school_name = Profile.objects.filter(school__icontains=schoolInput)
         join_search = (Q(user_name) and Q(school_name))
-        students = list(dict.fromkeys(list(chain(school_name))))
+        students = list(dict.fromkeys(list(chain(user_name))))
+        if request.GET is None and request.GET == '':
+            return render(request, 'profiles/search_student_results.html',
+                          {'matches': students})
         return render(request, 'profiles/search_student_results.html',
                       {'matches': students, 'query': join_search})
     else:
