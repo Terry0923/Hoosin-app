@@ -6,9 +6,9 @@
     <h2>Search Results:</h2>
     </head>
     <body>
-        <legend class="border-bottom mb-4" style="margin-top: 15px;">Students</legend>
+        <legend class="border-bottom mb-4" style="margin-top: 15px;">Matches</legend>
         {% if matches %}
-            <p style="margin-top:-15px;">Found {{ matches|length }} students match{{ matches|pluralize:"es" }}.</p>
+            <p style="margin-top:-15px;">Found {{ matches|length }} student match{{ matches|pluralize:"es" }}.</p>
             <ul class="list-group">
                 {% for match in matches %}
                 <li class="list-group-item">
