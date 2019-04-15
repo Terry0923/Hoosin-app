@@ -274,7 +274,7 @@ def student_user_search(request):
         return render(request, 'profiles/search_student_results.html',
                       {'matches': students, 'query':u})
     else:
-        return HttpResponse('Please submit a search term.')
+        return render(request, 'profiles/search_student.html')
 
 
 @login_required
