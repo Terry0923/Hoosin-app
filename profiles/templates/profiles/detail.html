@@ -42,17 +42,16 @@
         <p> {{ uid.profile.bio}} </p>
         <!-- friends -->
         {% if  uid != current_user.user %}
-        {% if uid in current_user.friends.all %}
-        <form action="{{user}}/unfollow/" method="post">
-          {% csrf_token %}
-          <input class="btn btn-primary" type="submit" value="Unfollow"></form>
-        {% else %}
-        <form action="{{user}}/follow/" method="post">
-          {% csrf_token %}
-          <input class="btn btn-primary" type="submit" value="Follow"></form>
-            <!--  -->
-              {% endif %}
-              {% endif %}
+            {% if uid in current_user.friends.all %}
+            <form action="{{user}}/unfollow/" method="post">
+              {% csrf_token %}
+              <input class="btn btn-primary" type="submit" value="Unfollow"></form>
+            {% else %}
+            <form action="{{user}}/follow/" method="post">
+              {% csrf_token %}
+              <input class="btn btn-primary" type="submit" value="Follow"></form>
+            {% endif %}
+        {% endif %}
     </div>
 
 {% endblock %}
