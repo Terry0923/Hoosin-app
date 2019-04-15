@@ -1,0 +1,10 @@
+{% extends 'profiles/base.html' %}
+{% block content %}
+<h2>Sent Email to {{ uid.username }} </h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group col-md-6 mb-0">
+      Header
+  </div>
+  </form>
+{% endblock %}

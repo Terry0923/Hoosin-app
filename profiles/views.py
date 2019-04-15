@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from itertools import chain
 from django.db.models import Q
+from django.core.mail import send_mail
 
 
 def home(request):
@@ -85,24 +86,39 @@ def club_search(request):
     else:
         return HttpResponse('Please submit a search term.')
 
+def email(request):
+    subject = request.POST.get('subject', '')
+    message = request.POST.get('message', '')
+    from_email = request.POST.get('from_email', '')
+    if subject and message and from_email:
+        try:
+            send_mail(subject, message, from_email, ['admin@example.com'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        return HttpResponseRedirect('/contact/thanks/')
+    return render(request, 'profiles/email.html')
 
-def student_user_search(request):
+
+def student_search_form(request):
+    return render(request, 'profiles/search_student.html')
+
+def student_search(request):
     if 'nameInput' in request.GET and request.GET['nameInput'] or 'schoolInput' in request.GET and request.GET['schoolInput'] or 'majorInput' in request.GET and request.GET['majorInput'] or 'yearInput' in request.GET and request.GET['yearInput']:
         nameInput = request.GET['nameInput']
         schoolInput = request.GET['schoolInput']
         majorInput = request.GET['majorInput']
         yearInput = request.GET['yearInput']
         u = Profile.objects.filter(user__username__icontains=nameInput,
-                                    school__icontains=schoolInput,
-                                    major__icontains=majorInput,
-                                    year__icontains=yearInput,
-                                        )
-        # p = Profile.objects.filter(school__icontains=schoolInput)
+                            school__icontains=schoolInput,
+                            major__icontains=majorInput,
+                            year__icontains=yearInput,
+                                )
         students = list(dict.fromkeys(list(chain(u))))
         return render(request, 'profiles/search_student_results.html',
-                      {'matches': students, 'query':u})
+                      {'matches': students, 'query': u})
     else:
         return HttpResponse('Please submit a search term.')
+
 
 @login_required
 def profile(request):
