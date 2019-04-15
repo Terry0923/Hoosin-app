@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'^course-search/$', views.course_search, name='course-search'),
     url(r'^club-search-form/$', views.club_search_form, name='club-search-form'),
     url(r'^club-search/$', views.club_search, name='club-search'),
-    # url(r'^search-form/$', views.search_form, name='search-form'),
-    # url(r'^search/$', views.search, name='search-results'),
+    path('student-search/',views.student_user_search, name='student-user-search'),
+    path('student-search-form/',views.student_search_form, name='student-search-form'),
 ]

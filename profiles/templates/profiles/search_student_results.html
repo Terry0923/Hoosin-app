@@ -1,0 +1,27 @@
+{% extends 'profiles/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<html>
+    <head>
+    <h2>Search Results:</h2>
+    </head>
+    <body>
+        <legend class="border-bottom mb-4" style="margin-top: 15px;">Students</legend>
+        {% if matches %}
+            <p style="margin-top:-15px;">Found {{ matches|length }} students match{{ matches|pluralize:"es" }}.</p>
+            <ul class="list-group">
+                {% for match in matches %}
+                <li class="list-group-item">
+                    <h5><a href="/profiles/students/{{ match.user.username }}">{{ match.user.username }}</a></h5>
+                    <!-- {% if match.description %}
+                        <p>{{ match.description }} </p>
+                    {% endif %} -->
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="margin-top: -10px;">Found no matches to skill groups with your criteria.</p>
+        {% endif %}
+    </body>
+</html>
+{% endblock %}
