@@ -86,19 +86,21 @@ def club_search(request):
         return HttpResponse('Please submit a search term.')
 
 
-def student_search(request):
-    if 'schoolInput' in request.GET and request.GET['schoolInput']:
-        schoolInput = request.GET['schoolInput']
+def student_user_search(request):
+    if 'nameInput' in request.GET and request.GET['nameInput'] or 'schoolInput' in request.GET and request.GET['schoolInput'] or 'majorInput' in request.GET and request.GET['majorInput'] or 'yearInput' in request.GET and request.GET['yearInput']:
         nameInput = request.GET['nameInput']
-        user_name = User.objects.filter(username__icontains=nameInput)
-        school_name = Profile.objects.filter(school__icontains=schoolInput)
-        join_search = (Q(user_name) and Q(school_name))
-        students = list(dict.fromkeys(list(chain(user_name))))
-        if request.GET is None and request.GET == '':
-            return render(request, 'profiles/search_student_results.html',
-                          {'matches': students})
+        schoolInput = request.GET['schoolInput']
+        majorInput = request.GET['majorInput']
+        yearInput = request.GET['yearInput']
+        u = Profile.objects.filter(user__username__icontains=nameInput,
+                                    school__icontains=schoolInput,
+                                    major__icontains=majorInput,
+                                    year__icontains=yearInput,
+                                        )
+        # p = Profile.objects.filter(school__icontains=schoolInput)
+        students = list(dict.fromkeys(list(chain(u))))
         return render(request, 'profiles/search_student_results.html',
-                      {'matches': students, 'query': join_search})
+                      {'matches': students, 'query':u})
     else:
         return HttpResponse('Please submit a search term.')
 

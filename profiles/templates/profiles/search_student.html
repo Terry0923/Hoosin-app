@@ -7,11 +7,13 @@
 <body>
       <form action="/profiles/student-search/" method="get">
         <!-- <input class='form-control' type="text" name="q" style="margin-bottom: 10px;"> -->
+        username
         <input type="text" name ="nameInput" style="margin-bottom: 10px;">
+        <p>
         school
         <input class="awesomplete" name="schoolInput" list="mylist">
-        <datalist id="mylist"">
-  	<option value="School of Nursing">School of Nursing</option>
+        <datalist id="mylist"" name="schoolInput">
+  	<option>School of Nursing</option>
   	<option>School of Medicine</option>
   	<option>School of Law</option>
   	<option>School of Engineering and Applied Science</option>
@@ -20,6 +22,20 @@
   	<option>Mcintire School of Commerce</option>
     <option>School of Architecture</option>
 </datalist>
+      </p>
+      <p>
+      major
+      <input type="text" name="majorInput"  style="margin-bottom: 10px;">
+      </p>
+      year
+      <input list="browsers" name=yearInput>
+  <datalist id="browsers">
+    <option value="first">
+    <option value="second">
+    <option value="third">
+    <option value="fourth">
+  </datalist>
+  </p>
           <input class='btn btn-outline-info' type="submit" value="Search">
       </form>
 </body>

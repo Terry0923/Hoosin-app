@@ -1,4 +1,3 @@
-
 {% extends 'profiles/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -27,13 +26,18 @@
             <!--<p style="margin-top: -10px;">Found no matches to students with your criteria.</p>-->
         <!--{% endif %}-->
 
-        <legend class="border-bottom mb-4" style="margin-top: 15px;">Skill Groups</legend>
+        <legend class="border-bottom mb-4" style="margin-top: 15px;">Matches</legend>
         {% if matches %}
-            <p style="margin-top:-15px;">Found {{ matches|length }} skill group match{{ matches|pluralize:"es" }}.</p>
+            <p style="margin-top:-15px;">Found {{ matches|length }} match{{ matches|pluralize:"es" }}.</p>
             <ul class="list-group">
                 {% for match in matches %}
                 <li class="list-group-item">
-                    <h5><a href="/profiles/clubs/{{ match.name }}">{{ match.name }}</a></h5>
+                    {% if match.title %}
+                        <h5><a href="/profiles/courses/{{ match.title }}">{{ match.title }}</a></h5>
+                    {% endif %}
+                    {% if match.name %}
+                        <h5><a href="/profiles/clubs/{{ match.name }}">{{ match.name }}</a></h5>
+                    {% endif %}
                     {% if match.description %}
                         <p>{{ match.description }} </p>
                     {% endif %}
@@ -41,7 +45,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p style="margin-top: -10px;">Found no matches to skill groups with your criteria.</p>
+            <p style="margin-top: -10px;">Found no matches with your criteria.</p>
         {% endif %}
     </body>
 </html>
