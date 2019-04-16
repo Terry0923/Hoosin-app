@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from itertools import chain
 from django.utils import timezone
 from django.urls import reverse
+import pandas as pd
+from copy import deepcopy
 
 def home(request):
     return render(request, 'profiles/home.html')
@@ -91,7 +93,17 @@ def studentindex(request):
 
 
 def courseindex(request):
-    course_list = Course.objects.order_by('title')
+    data = pd.read_csv('data.csv')
+    acronym = deepcopy(data.loc[:, 'Mnemonic'])
+    course_num = deepcopy(data.loc[:, 'Number'])
+    prof = deepcopy(data.loc[:, 'Instructor1'])
+    time = deepcopy(data.loc[:, 'Days1'])
+    room = deepcopy(data.loc[:, 'Room1'])
+    name = deepcopy(data.loc[:, 'Title'])
+    description = deepcopy(data.loc[:, 'Description'])
+    data['course'] = data.loc[:, 'Mnemonic'] + " " + data.loc[:, 'Number'].map(str)
+    course = deepcopy(data['course'])
+    course_list = Course.objects.order_by('course')
     context = {'course_list': course_list}
     return render(request, 'profiles/course_index.html', context)
 
