@@ -12,7 +12,11 @@ from django.utils import timezone
 from django.urls import reverse
 
 def home(request):
-    return render(request, 'profiles/home.html')
+    if not request.user.is_authenticated:
+        # return redirect('home')
+        return render(request, 'profiles/home.html')
+    else:
+        return render(request, 'profiles/dashboard.html')
 
 
 def dashboard(request):
