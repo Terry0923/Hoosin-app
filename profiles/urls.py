@@ -12,7 +12,7 @@ urlpatterns = [
     path('clubs/', views.clubindex, name='club-index'),
     path('students/<str:username>/', views.detail, name='student-detail'),
     path('students/<str:username>/<str:user>/follow/',views.follow, name='follow'),
-        path('students/<str:username>/<str:user>/unfollow/',views.unfollow, name='unfollow'),
+    path('students/<str:username>/<str:user>/unfollow/',views.unfollow, name='unfollow'),
     path('courses/<str:title>/', views.course_detail),
     path('clubs/<str:name>/', views.skillGroupDetail),
     path('clubs/<str:name>/<str:user>/join', views.join),
