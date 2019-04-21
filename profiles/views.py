@@ -10,11 +10,15 @@ from django.contrib.auth.models import User
 from itertools import chain
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth import login
 
 def home(request):
-    return render(request, 'profiles/home.html')
+    if request.user.is_authenticated:
+        return render(request,'profiles/dashboard.html')
+    else:
+        return render(request, 'profiles/home.html')
 
-
+@login_required
 def dashboard(request):
     if request.user.is_anonymous:
         return redirect('home')
@@ -81,7 +85,7 @@ def addComment(request, pk, name):
 def about(request):
     return render(request, 'profiles/about.html')
 
-
+@login_required
 def studentindex(request):
     student_list = User.objects.all()#values_list('username', flat=True)
     context = {
@@ -89,19 +93,19 @@ def studentindex(request):
     }
     return render(request, 'profiles/studentIndex.html', context)
 
-
+@login_required
 def courseindex(request):
     course_list = Course.objects.order_by('title')
     context = {'course_list': course_list}
     return render(request, 'profiles/course_index.html', context)
 
-
+@login_required
 def clubindex(request):
     club_list = Club.objects.order_by('name')
     context = {'club_list': club_list}
     return render(request, 'profiles/club_index.html', context)
 
-
+@login_required
 def detail(request, username):
     try:
         uid = User.objects.get(username=username)
@@ -110,7 +114,7 @@ def detail(request, username):
         raise Http404('User not found')
     return render(request, 'profiles/detail.html', {'uid':uid, 'current_user':cu})
 
-
+@login_required
 def course_detail(request, title):
     try:
         uid = Course.objects.get(title=title)
@@ -118,7 +122,7 @@ def course_detail(request, title):
         raise Http404('Course not found')
     return render(request, 'profiles/course_detail.html', {'uid':uid})
 
-
+@login_required
 def postDetail(request, name, pk):
     try:
         post = Post.objects.get(pk=pk)
@@ -127,7 +131,7 @@ def postDetail(request, name, pk):
         raise Http404('User not found')
     return render(request, 'profiles/postDetail.html', {'post':post, 'comments':comments})
 
-
+@login_required
 def skillGroupDetail(request, name):
     try:
         c = Club.objects.get(name=name)
@@ -217,15 +221,15 @@ def search(request):
         return render(request, 'profiles/search_control.html')
 '''
 
-
+@login_required
 def search_control(request):
     return render(request, 'profiles/search_control.html')
 
-
+@login_required
 def course_search_form(request):
     return render(request, 'profiles/course_search_form.html')
 
-
+@login_required
 def course_search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -238,11 +242,11 @@ def course_search(request):
     else:
         return render(request, 'profiles/course_search_form.html')
 
-
+@login_required
 def club_search_form(request):
     return render(request, 'profiles/club_search_form.html')
 
-
+@login_required
 def club_search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -255,9 +259,11 @@ def club_search(request):
     else:
         return render(request, 'profiles/club_search_form.html')
 
+@login_required
 def student_search_form(request):
     return render(request, 'profiles/search_student.html')
 
+@login_required
 def student_user_search(request):
     if 'nameInput' in request.GET and request.GET['nameInput'] or 'schoolInput' in request.GET and request.GET['schoolInput'] or 'majorInput' in request.GET and request.GET['majorInput'] or 'yearInput' in request.GET and request.GET['yearInput']:
         nameInput = request.GET['nameInput']
