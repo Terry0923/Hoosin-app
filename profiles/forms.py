@@ -44,9 +44,8 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['body']
 
-'''
-class ProfileUpdateForm(forms.ModelForm):
+#for testing purposes
+class UserForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ['image']
-'''
+        model = User
+        fields = ('email','password','first_name')
