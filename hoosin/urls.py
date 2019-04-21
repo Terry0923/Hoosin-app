@@ -28,7 +28,6 @@ urlpatterns = [
     path('', profile_views.home, name='home'),
     path('about/', profile_views.about, name='about'),
     path('login/',auth_views.LoginView.as_view(template_name='profiles/login.html',redirect_authenticated_user=True), name='login'),
-    # path('login/',profile_views.custom_login, name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='profiles/logout.html'), name='logout'),
     path('profile/',profile_views.profile, name='profile'),
     path('register/', profile_views.register, name='register'),
