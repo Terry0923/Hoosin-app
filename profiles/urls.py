@@ -15,6 +15,8 @@ urlpatterns = [
     path('students/<str:username>/<str:user>/unfollow/',views.unfollow, name='unfollow'),
     path('courses/<str:title>/', views.course_detail),
     path('clubs/<str:name>/', views.skillGroupDetail),
+    path('courses/<str:title>/<str:user>/add_course/',views.add_course),
+    path('courses/<str:title>/<str:user>/remove_course/',views.remove_course),
     path('clubs/<str:name>/<str:user>/join', views.join),
     path('clubs/<str:name>/<str:user>/leave', views.leave),
     path('clubs/<str:name>/<int:pk>/', views.postDetail),

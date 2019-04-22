@@ -60,6 +60,7 @@ class Profile(models.Model):
         default="first")
     major = models.CharField(max_length=150, default="undeclared")
 
+
     def __str__(self):
         return f'{self.user.username} Profile'
 
@@ -67,6 +68,7 @@ class Profile(models.Model):
 class Course(models.Model):
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=350, default="a course on Grounds")
+    students = models.ManyToManyField(User)
     long_description = models.TextField(
         default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar ipsum mattis laoreet dictum. Donec et odio ligula. Nullam et purus quam. Duis vel malesuada purus, at iaculis est. Donec eget placerat augue. Sed pharetra pellentesque augue at ultrices. Cras ac massa eleifend, blandit ligula sed, porttitor magna. Etiam massa eros, sollicitudin eu sem eget, bibendum ultrices turpis. Mauris tincidunt convallis ligula vel vehicula. Aliquam in leo vel justo rutrum tempus a fringilla ante. Proin rhoncus commodo dui, sed volutpat lorem gravida vel. Sed non lacus viverra, ultrices purus id, maximus nunc. Mauris vitae urna diam. Donec quis posuere enim. Cras a nibh porttitor, tincidunt enim nec, rhoncus nibh.")
     '''

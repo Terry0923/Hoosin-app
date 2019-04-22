@@ -27,6 +27,7 @@ def dashboard(request):
         club_list = Club.objects.filter(users=request.user)
         clubs_to_join = Club.objects.order_by('?')[:3]          # chooses 5 random clubs
         friend_list = set(request.user.profile.friends.all())
+        course_list = Course.objects.filter(students=request.user)
         friends_to_make = User.objects.order_by('?')[:3]
         if len(club_list) != 0:
             c = club_list.first()
@@ -36,6 +37,7 @@ def dashboard(request):
             'clubs_to_join': clubs_to_join,
             'friend_list': friend_list,
             'friends_to_make': friends_to_make,
+            'course_list':course_list,
         }
         return render(request, 'profiles/dashboard.html', context)
 
@@ -117,10 +119,11 @@ def detail(request, username):
 @login_required
 def course_detail(request, title):
     try:
-        uid = Course.objects.get(title=title)
+        course = Course.objects.get(title=title)
+        cu = Profile.objects.get(user=request.user)
     except Course.DoesNotExist:
         raise Http404('Course not found')
-    return render(request, 'profiles/course_detail.html', {'uid':uid})
+    return render(request, 'profiles/course_detail.html', {'course':course, 'current_user':cu})
 
 @login_required
 def postDetail(request, name, pk):
@@ -171,6 +174,20 @@ def unfollow(request, username, user):
     cu.friends.remove(ou)
     cu.save()
     return redirect('/profiles/students/'+username)
+
+def add_course(request, title, user):
+    course = Course.objects.get(title=title)
+    student = User.objects.get(username=user)
+    course.students.add(student)
+    course.save()
+    return redirect('/profiles/courses/'+title)
+
+def remove_course(request, title, user):
+    course = Course.objects.get(title=title)
+    student = User.objects.get(username=user)
+    course.students.remove(student)
+    course.save()
+    return redirect('/profiles/courses/'+title)
 
 def like(request, name, pk):
     p = Post.objects.get(pk=pk)

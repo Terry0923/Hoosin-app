@@ -1,6 +1,15 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-    <h2>{{ uid.title }}</h2>
-    <p>{{ uid.description }}</p>
-    <p>{{ uid.long_description }}</p>
+    <h2>{{ course.title }}</h2>
+    <p>{{ course.description }}</p>
+    <p>{{ course.long_description }}</p>
+        {% if user in course.students.all %}
+        <form action="{{user}}/remove_course/" method="post">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" value="Remove Course"></form>
+        {% else %}
+        <form action="{{user}}/add_course/" method="post">
+          {% csrf_token %}
+          <input class="btn btn-primary" type="submit" value="Add Course"></form>
+        {% endif %}
 {% endblock %}
