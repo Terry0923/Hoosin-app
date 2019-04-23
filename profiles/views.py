@@ -287,6 +287,14 @@ def student_user_search(request):
         schoolInput = request.GET['schoolInput']
         majorInput = request.GET['majorInput']
         yearInput = request.GET['yearInput']
+        if yearInput == "1":
+            yearInput = "first"
+        if yearInput == "2":
+            yearInput = "second"
+        if yearInput == "3":
+            yearInput = "third"
+        if yearInput == "4":
+            yearInput = "fourth"
         u = Profile.objects.filter(user__username__icontains=nameInput,
                                     school__icontains=schoolInput,
                                     major__icontains=majorInput,
@@ -327,3 +335,7 @@ def profile(request):
     }
 
     return render(request, 'profiles/profile.html', context)
+
+# @login_required
+# def skillGroup(request):
+#

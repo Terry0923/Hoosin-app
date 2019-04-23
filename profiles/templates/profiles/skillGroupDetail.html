@@ -50,25 +50,31 @@
             <div style="position: absolute; right: 20px; bottom: 10px;">
                 {% if user in c.users.all %}
                 {% if post.type == 'announcement' or post.type == 'misc' %}
-                <form style="display: inline-block; margin: 2px" action="{{post.pk}}/like" method="post">
-                    {% csrf_token %}
-                    <input class="btn btn-outline-info" type="submit" value="Like">
-                </form>
+                {% if user.profile in post.profile.all %}
                 <form style="display: inline-block; margin: 2px" action="{{post.pk}}/unlike" method="post">
                     {% csrf_token %}
                     <input class="btn btn-outline-info" type="submit" value="Unlike">
                 </form>
+                {% else %}
+                <form style="display: inline-block; margin: 2px" action="{{post.pk}}/like" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-outline-info" type="submit" value="Like">
+                </form>
+                {% endif %}
                 {% endif %}
 
                 {% if post.type == 'event' %}
+                {% if user.profile not in post.profile.all %}
                 <form style="display: inline-block; margin: 2px" action="{{post.pk}}/like" method="post">
                     {% csrf_token %}
                     <input class="btn btn-outline-info" type="submit" value="Attend">
                 </form>
+                {% else %}
                 <form style="display: inline-block; margin: 2px" action="{{post.pk}}/unlike" method="post">
                     {% csrf_token %}
                     <input class="btn btn-outline-info" type="submit" value="Decline">
                 </form>
+                {% endif %}
                 {% endif %}
                 {% endif %}
             </div>
