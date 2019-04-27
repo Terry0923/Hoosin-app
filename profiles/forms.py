@@ -1,7 +1,7 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Club, Post
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile, Comment
 from django.core.validators import EmailValidator
@@ -32,6 +32,13 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image', 'status', 'year','major','school', 'bio']
+
+
+class ClubForm(forms.ModelForm):
+    class Meta:
+        model = Club
+        fields = ['name', 'description', 'image']
+
 
 class PostForm(forms.ModelForm):
     class Meta:
