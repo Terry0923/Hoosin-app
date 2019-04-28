@@ -1,15 +1,42 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-    <h2>All Courses</h2>
-{% if course_list%}
-    <ul class="list-group">
-    {% for c in course_list %}
-        <li class="list-group-item">
-            <h5><a href="/profiles/courses/{{ c.title }}">{{ c.title }}</a></h5>
-            <p>{{ c.description }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No courses exist in the system.</p>
-{% endif %}
+    <h2>All Courses ({{ count }})</h2>
+    <div style="margin-top: 15px; margin-bottom: 20px !important">
+        {% if courses %}
+            <ul class="list-group">
+            {% for c in courses %}
+                <li class="list-group-item">
+                    <h5><a href="/profiles/courses/{{ c.title }}">{{ c.title }}</a></h5>
+                    <p>{{ c.description }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No courses exist in the system.</p>
+        {% endif %}
+    </div>
+    <div style="margin-top: 15px; margin-bottom: 20px !important">
+        <ul class="pagination">
+            {% if courses.has_previous %}
+                <li class="page-item">
+                        <a class="page-link" href="?page={{ courses.previous_page_number }}">&laquo;</a>
+                    </li>
+            {% endif %}
+            {% for c in courses.paginator.page_range %}
+                {% if courses.number == c %}
+                    <li class="page-item active">
+                        <a class="page-link" href="?page={{ c }}">{{ c }}</a>
+                    </li>
+                {% elif c > courses.number|add:'-3' and c < courses.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ c }}">{{ c }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if courses.has_next %}
+                <li class="page-item">
+                        <a class="page-link" href="?page={{ courses.next_page_number }}">&raquo;</a>
+                    </li>
+            {% endif %}
+        </ul>
+    </div>
 {% endblock %}

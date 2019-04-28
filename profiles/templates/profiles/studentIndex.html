@@ -1,17 +1,18 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
 <h2>All Students </h2>
-{% if student_list %}
-    <ul class="list-group">
-    {% for s in student_list %}
-
-        <li class="list-group-item">
-            <img src="/media/{{s.profile.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
-            <h5><a href="/profiles/students/{{ s.username }}">{{ s.username }}</a></h5>
-            <p>{{ s.profile.year }} year, {{ s.profile.major }} major</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No students exist in the system.</p>
-{% endif %}
+<div style="margin-top: 15px; margin-bottom: 20px !important">
+    {% if student_list %}
+        <ul class="list-group">
+        {% for s in student_list %}
+            <li class="list-group-item">
+                <img src="/media/{{s.profile.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
+                <h5><a href="/profiles/students/{{ s.username }}">{{ s.username }}</a></h5>
+                <p>{{ s.profile.year }} year, {{ s.profile.major }} major</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No students exist in the system.</p>
+    {% endif %}
+</div>
 {% endblock %}

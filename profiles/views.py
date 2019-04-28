@@ -15,6 +15,8 @@ from copy import deepcopy
 from django.core.mail import send_mail
 from django.contrib.auth import login
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 # homepage
@@ -86,9 +88,16 @@ def courseindex(request):
     count = Course.objects.all().count()
     if count == 0:
         coursesave()
-    courses = Course.objects.all()
-
-    context = {'course_list': courses}
+    course_list = Course.objects.all()
+    paginator = Paginator(course_list, 20)
+    page = request.GET.get('page')
+    try:
+        courses = paginator.page(page)
+    except PageNotAnInteger:
+        courses = paginator.page(1)
+    except EmptyPage:
+        courses = paginator.page(paginator.num_pages)
+    context = {'courses' : courses, 'page' : page, 'count' : count}
     return render(request, 'profiles/course_index.html', context)
 
 
