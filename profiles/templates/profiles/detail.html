@@ -9,7 +9,7 @@
         <h2 class="border-bottom" style="padding-bottom: 5px;">{{ uid.username }}</h2>
         <!-- email -->
         {% if uid.email %}
-        <p><b>Email:</b> {{ uid.email }}</p>
+        <p><b>Email:</b> <a href="mailto:{{uid.email}}">{{ uid.email }}</a></p>
         {% else %}
             <p><b>Email:</b> none</p>
         {% endif %}
