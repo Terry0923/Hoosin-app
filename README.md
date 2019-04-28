@@ -1,4 +1,4 @@
-# project-103-hoosin
+# Hoosin-app
 
 This is the HoosIn application
 
