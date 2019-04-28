@@ -4,6 +4,7 @@ from django.test import TestCase
 from .models import Student, Club, Profile
 from .forms import UserRegisterForm
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import SimpleUploadedFile
 # Create your tests here.
 #test for models
 class StudentModelTest(TestCase):
@@ -48,10 +49,10 @@ class ProfileSetupModelTest(TestCase):
 
 
 
-        '''
+'''
 class RegisterFormTests(TestCase):
 self.user.username
     def test_registration_class(self):
         register = UserRegisterForm(email="jt2fx@company.edu")
         self.assertRaises(ValidationError, register.email)
-        '''
+'''

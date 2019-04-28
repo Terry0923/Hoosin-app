@@ -19,7 +19,7 @@ class PageTest(TestCase):
 
     def test_student_page_status_code(self):
         response = self.client.get(reverse('profiles:student-index'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
 
     def test_register_page_status_code(self):
         response = self.client.get(reverse('register'))
@@ -36,12 +36,12 @@ class PageTest(TestCase):
 
     def test_club_page_status_code(self):
         response = self.client.get(reverse('profiles:club-index'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
 
     def test_search_form_page_status_code(self):
         response = self.client.get(reverse('profiles:search-control'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
 
     def test_search_results_page_status_code(self):
         response = self.client.get(reverse('profiles:club-search'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)

@@ -49,6 +49,19 @@
     <p>You don't follow anyone on Hoosin. To get started, click "Students" above or check out recommended profiles to follow (either featured students or members of skill groups you're a part of).</p>
     {% endif %}
 
+    <h5 style="margin-top: 25px;">Your Courses</h5>
+    {% if course_list%}
+        <ul class="list-group">
+        {% for c in course_list %}
+            <li class="list-group-item">
+                <h5><a href="/profiles/courses/{{ c.title }}">{{ c.title }}</a></h5>
+                <p>{{ c.description }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+    <p>You are not in any courses. To get started, click "Course" above.</p>
+    {% endif %}
+
     {% if friends_to_make%}
         <h5 style="margin-top: 25px;"> Featured Students</h5>
         <div class="container">

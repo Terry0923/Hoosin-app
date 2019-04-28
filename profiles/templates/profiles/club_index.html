@@ -1,7 +1,10 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
     <h2>All Skill Groups</h2>
-{% if club_list%}
+    <div style="margin-top: 15px; margin-bottom: 20px !important">
+        <a href="/profiles/clubs/add-club" class="btn btn-info">Add a Club</a>
+    </div>
+{% if club_list %}
     <ul class="list-group">
     {% for c in club_list %}
         <li class="list-group-item">

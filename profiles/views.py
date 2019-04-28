@@ -3,22 +3,34 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Student, Course, Club, Profile, Post, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm, CommentForm
+from .forms import ClubForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, PostForm, CommentForm
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.models import User
 from itertools import chain
 from django.utils import timezone
 from django.urls import reverse
+<<<<<<< HEAD
 import pandas as pd
 from copy import deepcopy
 from django.core.mail import send_mail
 
+=======
+from django.contrib.auth import login
+from django.core.exceptions import ObjectDoesNotExist
+>>>>>>> f76836bceed065e9d2bfe3a357187d87f902be44
 
+
+# homepage
 def home(request):
-    return render(request, 'profiles/home.html')
+    if request.user.is_authenticated:
+        return render(request,'profiles/dashboard.html')
+    else:
+        return render(request, 'profiles/home.html')
 
 
+# dashboard
+@login_required
 def dashboard(request):
     if request.user.is_anonymous:
         return redirect('home')
@@ -27,6 +39,7 @@ def dashboard(request):
         club_list = Club.objects.filter(users=request.user)
         clubs_to_join = Club.objects.order_by('?')[:3]          # chooses 5 random clubs
         friend_list = set(request.user.profile.friends.all())
+        course_list = Course.objects.filter(students=request.user)
         friends_to_make = User.objects.order_by('?')[:3]
         if len(club_list) != 0:
             c = club_list.first()
@@ -36,56 +49,18 @@ def dashboard(request):
             'clubs_to_join': clubs_to_join,
             'friend_list': friend_list,
             'friends_to_make': friends_to_make,
+            'course_list':course_list,
         }
         return render(request, 'profiles/dashboard.html', context)
 
 
-def addPost(request, name):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = PostForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            data = request.POST.copy()
-            c = Club.objects.get(name=name)
-            if name == c.name:
-                post = Post(headline = data.get('headline'), date=timezone.now(), type = data.get('type'), body = data.get('body'), club = c)
-                post.save()
-                # redirect to a new URL:
-                return HttpResponseRedirect('/profiles/clubs/'+c.name+'/')
-
-        # if a GET (or any other method) we'll create a blank form
-    else:
-        form = PostForm()
-
-    return render(request, 'profiles/post.html', {'form': form})
-
-
-def addComment(request, pk, name):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = CommentForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            data = request.POST.copy()
-            p = Post.objects.get(pk=pk)
-            c = p.club
-            comment=Comment(body=data.get('body'), date=timezone.now(), profile=request.user.profile, post=p)
-            comment.save()
-            return HttpResponseRedirect('/profiles/clubs/'+c.name+'/'+str(pk)+'/')
-
-        # if a GET (or any other method) we'll create a blank form
-    else:
-        form = CommentForm()
-
-    return render(request, 'profiles/comment.html', {'form': form})
-
+# about page
 def about(request):
     return render(request, 'profiles/about.html')
 
 
+# all indexes
+@login_required
 def studentindex(request):
     student_list = User.objects.all()#values_list('username', flat=True)
     context = {
@@ -110,6 +85,7 @@ def coursesave():
         if count == 0:
             course_item.save()
 
+@login_required
 def courseindex(request):
     count = Course.objects.all().count()
     if count == 0:
@@ -120,12 +96,15 @@ def courseindex(request):
     return render(request, 'profiles/course_index.html', context)
 
 
+@login_required
 def clubindex(request):
     club_list = Club.objects.order_by('name')
     context = {'club_list': club_list}
     return render(request, 'profiles/club_index.html', context)
 
 
+# individual detail pages
+@login_required
 def detail(request, username):
     try:
         uid = User.objects.get(username=username)
@@ -134,15 +113,16 @@ def detail(request, username):
         raise Http404('User not found')
     return render(request, 'profiles/detail.html', {'uid':uid, 'current_user':cu})
 
-
+@login_required
 def course_detail(request, title):
     try:
-        uid = Course.objects.get(title=title)
+        course = Course.objects.get(title=title)
+        cu = Profile.objects.get(user=request.user)
     except Course.DoesNotExist:
         raise Http404('Course not found')
-    return render(request, 'profiles/course_detail.html', {'uid':uid})
+    return render(request, 'profiles/course_detail.html', {'course':course, 'current_user':cu})
 
-
+@login_required
 def postDetail(request, name, pk):
     try:
         post = Post.objects.get(pk=pk)
@@ -151,7 +131,7 @@ def postDetail(request, name, pk):
         raise Http404('User not found')
     return render(request, 'profiles/postDetail.html', {'post':post, 'comments':comments})
 
-
+@login_required
 def skillGroupDetail(request, name):
     try:
         c = Club.objects.get(name=name)
@@ -160,13 +140,33 @@ def skillGroupDetail(request, name):
     return render(request, 'profiles/skillGroupDetail.html', {'c':c})
 
 
+# create, update, delete skill groups
+def addClub(request):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ClubForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            clubName = form.cleaned_data.get("name")
+            try:
+                existingClub = Club.objects.get(name=clubName)
+                messages.error(request, 'That club name has already been taken. Please try another name.')
+            except ObjectDoesNotExist:
+                form.save()
+                # redirect to a new URL:
+                return HttpResponseRedirect('/profiles/clubs/')
+    else:
+        form = ClubForm()
+    return render(request, 'profiles/addClub.html', {'form': form})
+
+
+# functions for interacting with clubs
 def join(request, name, user):
     c = Club.objects.get(name=name)
     u = User.objects.get(username=user)
     c.users.add(u)
     c.save()
     return redirect('/profiles/clubs/'+name)
-
 
 def leave(request, name, user):
     c = Club.objects.get(name=name)
@@ -178,6 +178,65 @@ def leave(request, name, user):
             pst.profile.remove(u.profile)
     return redirect('/profiles/clubs/'+name)
 
+
+# functions from interacting with posts
+def like(request, name, pk):
+    p = Post.objects.get(pk=pk)
+    prof = request.user.profile
+    p.profile.add(prof)
+    p.save()
+    return redirect('/profiles/clubs/'+name+'/')
+
+def unlike(request, name, pk):
+    p = Post.objects.get(pk=pk)
+    prof = request.user.profile
+    p.profile.remove(prof)
+    p.save()
+    return redirect('/profiles/clubs/'+name+'/')
+
+def addPost(request, name):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PostForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            data = request.POST.copy()
+            c = Club.objects.get(name=name)
+            if name == c.name:
+                post = Post(headline = data.get('headline'), date=timezone.now(), type = data.get('type'), body = data.get('body'), club = c)
+                post.save()
+                # redirect to a new URL:
+                return HttpResponseRedirect('/profiles/clubs/'+c.name+'/')
+
+        # if a GET (or any other method) we'll create a blank form
+    else:
+        form = PostForm()
+
+    return render(request, 'profiles/post.html', {'form': form})
+
+def addComment(request, pk, name):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = CommentForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            data = request.POST.copy()
+            p = Post.objects.get(pk=pk)
+            c = p.club
+            comment=Comment(body=data.get('body'), date=timezone.now(), profile=request.user.profile, post=p)
+            comment.save()
+            return HttpResponseRedirect('/profiles/clubs/'+c.name+'/'+str(pk)+'/')
+
+        # if a GET (or any other method) we'll create a blank form
+    else:
+        form = CommentForm()
+
+    return render(request, 'profiles/comment.html', {'form': form})
+
+
+# functions for interacting with users
 def follow(request, username, user):
     cu = Profile.objects.get(user=request.user)
     ou = User.objects.get(username=username)
@@ -192,13 +251,8 @@ def unfollow(request, username, user):
     cu.save()
     return redirect('/profiles/students/'+username)
 
-def like(request, name, pk):
-    p = Post.objects.get(pk=pk)
-    prof = request.user.profile
-    p.profile.add(prof)
-    p.save()
-    return redirect('/profiles/clubs/'+name+'/')
 
+<<<<<<< HEAD
 def email(request, name):
     subject = request.POST.get('subject', '')
     message = request.POST.get('message', '')
@@ -214,15 +268,25 @@ def email(request, name):
         # to get proper validation errors.
         return HttpResponse('Make sure all fields are entered and valid.')
 
+=======
+# functions for editing your profile
+def add_course(request, title, user):
+    course = Course.objects.get(title=title)
+    student = User.objects.get(username=user)
+    course.students.add(student)
+    course.save()
+    return redirect('/profiles/courses/'+title)
+>>>>>>> f76836bceed065e9d2bfe3a357187d87f902be44
 
-def unlike(request, name, pk):
-    p = Post.objects.get(pk=pk)
-    prof = request.user.profile
-    p.profile.remove(prof)
-    p.save()
-    return redirect('/profiles/clubs/'+name+'/')
+def remove_course(request, title, user):
+    course = Course.objects.get(title=title)
+    student = User.objects.get(username=user)
+    course.students.remove(student)
+    course.save()
+    return redirect('/profiles/courses/'+title)
 
 
+# registration
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -236,7 +300,7 @@ def register(request):
     return render(request, 'profiles/register.html', {'form': form})
 
 
-
+# old search form
 '''
 def search_form(request):
     return render(request, 'profiles/search_control.html')
@@ -256,15 +320,16 @@ def search(request):
         return render(request, 'profiles/search_control.html')
 '''
 
-
+# new search forms
+@login_required
 def search_control(request):
     return render(request, 'profiles/search_control.html')
 
-
+@login_required
 def course_search_form(request):
     return render(request, 'profiles/course_search_form.html')
 
-
+@login_required
 def course_search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -277,14 +342,18 @@ def course_search(request):
     else:
         return render(request, 'profiles/course_search_form.html')
 
-
+@login_required
 def club_search_form(request):
     return render(request, 'profiles/club_search_form.html')
 
+<<<<<<< HEAD
 def student_search_form(request):
     return render(request, 'profiles/search_student.html')
 
 
+=======
+@login_required
+>>>>>>> f76836bceed065e9d2bfe3a357187d87f902be44
 def club_search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -297,15 +366,25 @@ def club_search(request):
     else:
         return render(request, 'profiles/club_search_form.html')
 
+@login_required
 def student_search_form(request):
     return render(request, 'profiles/search_student.html')
 
+@login_required
 def student_user_search(request):
     if 'nameInput' in request.GET and request.GET['nameInput'] or 'schoolInput' in request.GET and request.GET['schoolInput'] or 'majorInput' in request.GET and request.GET['majorInput'] or 'yearInput' in request.GET and request.GET['yearInput']:
         nameInput = request.GET['nameInput']
         schoolInput = request.GET['schoolInput']
         majorInput = request.GET['majorInput']
         yearInput = request.GET['yearInput']
+        if yearInput == "1":
+            yearInput = "first"
+        if yearInput == "2":
+            yearInput = "second"
+        if yearInput == "3":
+            yearInput = "third"
+        if yearInput == "4":
+            yearInput = "fourth"
         u = Profile.objects.filter(user__username__icontains=nameInput,
                                     school__icontains=schoolInput,
                                     major__icontains=majorInput,
@@ -331,6 +410,7 @@ def student_search(request):
     else:
         return HttpResponse('Please submit a search term.')
 
+# edit profile
 @login_required
 def profile(request):
     user = Profile.objects.get_or_create(user=request.user)

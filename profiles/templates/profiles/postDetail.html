@@ -10,7 +10,7 @@
 
         <p class="likelist" > -
         {% for p in post.profile.all %}
-            {{ p.user.username }},
+            <a href="/profiles/students/{{ p.user.username }}">{{ p.user.username}},
         {% endfor %}
             ...
         </p>
