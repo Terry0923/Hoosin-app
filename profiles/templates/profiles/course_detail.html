@@ -6,10 +6,10 @@
         {% if user in course.students.all %}
         <form action="{{user}}/remove_course/" method="post">
           {% csrf_token %}
-          <input class="btn btn-danger" type="submit" value="Remove Course"></form>
+          <input class="btn btn-danger" type="submit" value="Remove Course from my Profile"></form>
         {% else %}
         <form action="{{user}}/add_course/" method="post">
           {% csrf_token %}
-          <input class="btn btn-success" type="submit" value="Add Course"></form>
+          <input class="btn btn-success" type="submit" value="Add Course to My Profile"></form>
         {% endif %}
 {% endblock %}

@@ -4,16 +4,18 @@
     <div style="margin-top: 15px; margin-bottom: 20px !important">
         <a href="/profiles/clubs/add-club" class="btn btn-info">Add a Club</a>
     </div>
-{% if club_list %}
-    <ul class="list-group">
-    {% for c in club_list %}
-        <li class="list-group-item">
-            <img src="/media/{{c.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
-            <h5><a href="/profiles/clubs/{{ c.name }}">{{ c.name }}</a></h5>
-            <p style="margin-right:80px;">{{ c.description|truncatechars:200 }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No clubs exist in the system.</p>
-{% endif %}
+    <div style="margin-top: 15px; margin-bottom: 20px !important">
+        {% if club_list %}
+            <ul class="list-group">
+            {% for c in club_list %}
+                <li class="list-group-item">
+                    <img src="/media/{{c.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
+                    <h5><a href="/profiles/clubs/{{ c.name }}">{{ c.name }}</a></h5>
+                    <p>{{ c.description|truncatechars:200 }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No clubs exist in the system.</p>
+        {% endif %}
+    </div>
 {% endblock %}
