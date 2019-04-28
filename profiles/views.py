@@ -10,15 +10,11 @@ from django.contrib.auth.models import User
 from itertools import chain
 from django.utils import timezone
 from django.urls import reverse
-<<<<<<< HEAD
 import pandas as pd
 from copy import deepcopy
 from django.core.mail import send_mail
-
-=======
 from django.contrib.auth import login
 from django.core.exceptions import ObjectDoesNotExist
->>>>>>> f76836bceed065e9d2bfe3a357187d87f902be44
 
 
 # homepage
