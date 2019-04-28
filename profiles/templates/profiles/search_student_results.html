@@ -14,9 +14,9 @@
 >>>>>>> 94bf91919c598b951995103efbae527bb2fe3ec0
     </head>
     <body>
-        <legend class="border-bottom mb-4" style="margin-top: 15px;">Students</legend>
+        <legend class="border-bottom mb-4" style="margin-top: 15px;">Matches</legend>
         {% if matches %}
-            <p style="margin-top:-15px;">Found {{ matches|length }} students match{{ matches|pluralize:"es" }}.</p>
+            <p style="margin-top:-15px;">Found {{ matches|length }} student match{{ matches|pluralize:"es" }}.</p>
             <ul class="list-group">
                 {% for match in matches %}
                 <li class="list-group-item">
@@ -28,7 +28,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p style="margin-top: -10px;">Found no matches to skill groups with your criteria.</p>
+            <p style="margin-top: -10px;">Found no matches to students with your criteria.</p>
         {% endif %}
     </body>
 </html>

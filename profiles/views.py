@@ -12,6 +12,8 @@ from django.utils import timezone
 from django.urls import reverse
 import pandas as pd
 from copy import deepcopy
+from django.core.mail import send_mail
+
 
 def home(request):
     return render(request, 'profiles/home.html')
@@ -91,8 +93,7 @@ def studentindex(request):
     }
     return render(request, 'profiles/studentIndex.html', context)
 
-
-def courseindex(request):
+def coursesave():
     data = pd.read_csv('data.csv')
     acronym = deepcopy(data.loc[:, 'Mnemonic'])
     course_num = deepcopy(data.loc[:, 'Number'])
@@ -100,11 +101,22 @@ def courseindex(request):
     time = deepcopy(data.loc[:, 'Days1'])
     room = deepcopy(data.loc[:, 'Room1'])
     name = deepcopy(data.loc[:, 'Title'])
-    description = deepcopy(data.loc[:, 'Description'])
+    descrip = deepcopy(data.loc[:, 'Description'])
     data['course'] = data.loc[:, 'Mnemonic'] + " " + data.loc[:, 'Number'].map(str)
     course = deepcopy(data['course'])
-    course_list = Course.objects.order_by('course')
-    context = {'course_list': course_list}
+    for i in range(len(course)):
+        course_item = Course(title = course[i], description = descrip[i])
+        count = Course.objects.filter(title = course[i], description = descrip[i]).count()
+        if count == 0:
+            course_item.save()
+
+def courseindex(request):
+    count = Course.objects.all().count()
+    if count == 0:
+        coursesave()
+    courses = Course.objects.all()
+
+    context = {'course_list': courses}
     return render(request, 'profiles/course_index.html', context)
 
 
@@ -186,6 +198,21 @@ def like(request, name, pk):
     p.profile.add(prof)
     p.save()
     return redirect('/profiles/clubs/'+name+'/')
+
+def email(request, name):
+    subject = request.POST.get('subject', '')
+    message = request.POST.get('message', '')
+    from_email = Profile.objects.get(user=request.user)
+    if subject and message and from_email:
+        try:
+            send_mail(subject, message, from_email, ['admin@example.com'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        # return HttpResponseRedirect('/contact/thanks/')
+    else:
+        # In reality we'd use a form class
+        # to get proper validation errors.
+        return HttpResponse('Make sure all fields are entered and valid.')
 
 
 def unlike(request, name, pk):
@@ -289,7 +316,7 @@ def student_user_search(request):
         return render(request, 'profiles/search_student_results.html',
                       {'matches': students, 'query':u})
     else:
-        return HttpResponse('Please submit a search term.')
+        return render(request, 'profiles/search_student.html')
 
 def student_search(request):
     if 'schoolInput' in request.GET and request.GET['schoolInput']:
