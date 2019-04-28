@@ -9,6 +9,6 @@
     {% endif %}
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-success">Save</button>
     </form>
 {% endblock %}

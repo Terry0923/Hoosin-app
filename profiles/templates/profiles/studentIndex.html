@@ -1,6 +1,6 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-<h2>All Students </h2>
+<h2>All Students ({{ student_list.count }})</h2>
 <div style="margin-top: 15px; margin-bottom: 20px !important">
     {% if student_list %}
         <ul class="list-group">

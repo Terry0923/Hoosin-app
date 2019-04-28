@@ -19,10 +19,13 @@
                 <p class="text-secondary">{{ user.profile.year }} year, {{ user.profile.major }} major</p>
             {% endif %}
             {% if user.profile.school %}
-              <p class="text-secondary"> {{ user.profile.school}} </p>
+              <p class="text-secondary">school: {{ user.profile.school}} </p>
+            {% endif %}
+            {% if user.profile.status %}
+                <p class="text-secondary">status: {{ user.profile.status }}</p>
             {% endif %}
             {% if user.profile.bio %}
-                <p class="text-secondary" style="width: 50% overflow-x: hidden   word-wrap: break-word;;"> {{ user.profile.bio}} </p>
+                <p class="text-secondary" style="width: 50% overflow-x: hidden   word-wrap: break-word;;">bio: {{ user.profile.bio}} </p>
             {% endif %}
             <!--<h6>All friends </h6>-->
             <!--{% if friend_list %}-->

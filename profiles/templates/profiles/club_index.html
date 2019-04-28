@@ -1,8 +1,8 @@
 {% extends 'profiles/base.html' %}
 {% block content %}
-    <h2>All Skill Groups</h2>
+    <h2>All Skill Groups ({{ club_list.count }})</h2>
     <div style="margin-top: 15px; margin-bottom: 20px !important">
-        <a href="/profiles/clubs/add-club" class="btn btn-info">Add a Club</a>
+        <a href="/profiles/clubs/add-club" class="btn btn-info">Add a Skill Group</a>
     </div>
     <div style="margin-top: 15px; margin-bottom: 20px !important">
         {% if club_list %}
@@ -15,7 +15,7 @@
             {% endfor %}
             </ul>
         {% else %}
-            <p>No clubs exist in the system.</p>
+            <p>No skill groups exist in the system.</p>
         {% endif %}
     </div>
 {% endblock %}
