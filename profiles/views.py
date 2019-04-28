@@ -256,6 +256,7 @@ def unfollow(request, username, user):
     cu.save()
     return redirect('/profiles/students/'+username)
 
+'''
 def email(request, name):
     subject = request.POST.get('subject', '')
     message = request.POST.get('message', '')
@@ -270,6 +271,7 @@ def email(request, name):
         # In reality we'd use a form class
         # to get proper validation errors.
         return HttpResponse('Make sure all fields are entered and valid.')
+'''
 
 
 # functions for editing your profile
@@ -334,16 +336,17 @@ def course_search_form(request):
 
 @login_required
 def course_search(request):
-    if 'q' in request.GET and request.GET['q']:
-        q = request.GET['q']
-        # users = User.objects.filter(username__icontains=q)
-        course_title = Course.objects.filter(title__icontains=q)
-        course_desc = Course.objects.filter(description__icontains=q)
-        courses = list(dict.fromkeys(list(chain(course_title, course_desc))))
+    if 'titleInput' in request.GET and request.GET['titleInput'] or 'descInput' in request.GET and request.GET['descInput']:
+        titleInput = request.GET['titleInput']
+        descInput = request.GET['descInput']
+        c = Course.objects.filter(title__icontains=titleInput,
+                                   description__icontains=descInput)
+        courses = list(dict.fromkeys(list(chain(c))))
         return render(request, 'profiles/search_results.html',
-                      {'matches': courses, 'query': q})
+                      {'matches': courses, 'query': c})
     else:
         return render(request, 'profiles/course_search_form.html')
+
 
 @login_required
 def club_search_form(request):

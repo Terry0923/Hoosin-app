@@ -1,14 +1,16 @@
+
 {% extends 'profiles/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
 <html>
 <head>
     <h2>Search for Courses</h2>
-    <p> Enter keywords to search by names and descriptions of classes on Grounds.</p>
 </head>
 <body>
+    <p> Enter keywords to search by name and/or descriptions of classes on Grounds.</p>
     <form action="/profiles/course-search/" method="get">
-        <input class='form-control' type="text" name="q" style="margin-bottom: 10px;">
+        <input type="text" class="form-control" name ="titleInput" id="title" placeholder="title" style="margin-bottom: 10px;">
+        <input type="text" class="form-control" name="descInput" id="description" placeholder="description" style="margin-bottom: 10px;">
         <input class='btn btn-outline-info' type="submit" value="Search">
     </form>
 </body>
