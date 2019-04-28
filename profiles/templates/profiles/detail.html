@@ -39,7 +39,7 @@
         {% endif %}
         <!-- bio -->
         <p><b>Bio:</b></p>
-        <p> {{ uid.profile.bio}} </p>
+        <p style="width: 50% overflow-x: hidden; word-wrap: break-word;"> {{ uid.profile.bio}} </p>
         <!-- friends -->
         {% if  uid != current_user.user %}
             {% if uid in current_user.friends.all %}

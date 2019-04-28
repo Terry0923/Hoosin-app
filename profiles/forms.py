@@ -11,8 +11,9 @@ class UserRegisterForm(UserCreationForm):
     def clean_email(self):
         submitted_data = self.cleaned_data['email']
         ALLOWED_DOMAINS = "virginia.edu"
+        PROFESSOR_DOMAINS = "sherriff@gmail.com"
         domain = submitted_data.split('@')[1]
-        if domain not in ALLOWED_DOMAINS:
+        if domain not in ALLOWED_DOMAINS and domain not in PROFESSOR_DOMAINS:
             raise forms.ValidationError(
                 f'Domain name must be "virginia.edu"'
             )

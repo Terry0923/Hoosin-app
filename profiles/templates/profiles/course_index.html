@@ -4,7 +4,7 @@
 {% if course_list%}
     <ul class="list-group">
     {% for c in course_list %}
-        <li class="list-group-item">
+        <li class="list-group-item" style="margin-right: 60px;">
             <h5><a href="/profiles/courses/{{ c.title }}">{{ c.title }}</a></h5>
             <p>{{ c.description }}</li>
     {% endfor %}
