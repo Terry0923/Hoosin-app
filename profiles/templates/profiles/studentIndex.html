@@ -8,7 +8,7 @@
             <li class="list-group-item">
                 <img src="/media/{{s.profile.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
                 <h5><a href="/profiles/students/{{ s.username }}">{{ s.username }}</a></h5>
-                <p>{{ s.profile.year }} year, {{ s.profile.major }} major</li>
+                <p style="margin-right: 80px;">{{ s.profile.year }} year, {{ s.profile.major }} major</li>
         {% endfor %}
         </ul>
     {% else %}

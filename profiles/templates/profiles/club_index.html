@@ -11,7 +11,7 @@
                 <li class="list-group-item">
                     <img src="/media/{{c.image}}" style="width: 70px; height: auto; position: absolute; right: 20px; border-radius: 110px;">
                     <h5><a href="/profiles/clubs/{{ c.name }}">{{ c.name }}</a></h5>
-                    <p>{{ c.description|truncatechars:200 }}</li>
+                    <p style="margin-right: 80px;">{{ c.description|truncatechars:200 }}</li>
             {% endfor %}
             </ul>
         {% else %}
