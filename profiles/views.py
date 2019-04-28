@@ -247,8 +247,6 @@ def unfollow(request, username, user):
     cu.save()
     return redirect('/profiles/students/'+username)
 
-
-<<<<<<< HEAD
 def email(request, name):
     subject = request.POST.get('subject', '')
     message = request.POST.get('message', '')
@@ -264,7 +262,7 @@ def email(request, name):
         # to get proper validation errors.
         return HttpResponse('Make sure all fields are entered and valid.')
 
-=======
+
 # functions for editing your profile
 def add_course(request, title, user):
     course = Course.objects.get(title=title)
@@ -272,7 +270,7 @@ def add_course(request, title, user):
     course.students.add(student)
     course.save()
     return redirect('/profiles/courses/'+title)
->>>>>>> f76836bceed065e9d2bfe3a357187d87f902be44
+
 
 def remove_course(request, title, user):
     course = Course.objects.get(title=title)
@@ -342,14 +340,11 @@ def course_search(request):
 def club_search_form(request):
     return render(request, 'profiles/club_search_form.html')
 
-<<<<<<< HEAD
+
 def student_search_form(request):
     return render(request, 'profiles/search_student.html')
 
-
-=======
 @login_required
->>>>>>> f76836bceed065e9d2bfe3a357187d87f902be44
 def club_search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
