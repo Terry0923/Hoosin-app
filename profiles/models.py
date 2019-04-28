@@ -69,7 +69,7 @@ class Course(models.Model):
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=4000, default="a course on Grounds")
     long_description = models.TextField()
-
+    students = models.ManyToManyField(User)
     def __str__(self):
         return self.title
 
