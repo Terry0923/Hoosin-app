@@ -54,16 +54,3 @@ Click "Logout" to log out.
 You may not view any relevent information without logging in.
 
 You may be redirected to dashboard if you attempt to log in or go back to homepage again when you are already logged in
-
-
-## Contributing
-
-Scrum Master: Pauline Vu
-
-Configuration Manage: Megan Do
-
-Requirements Manager: Saad Khan
-
-Testing Manage: Jui Tao Tsai
-
-Software Architect: Gautam K.
