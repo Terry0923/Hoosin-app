@@ -11,14 +11,6 @@ Hoosin is a standalone web application, but to develop locally, check requiremen
 
 ## Usage
 
-Professor superuser account:
-
-username: sherriff
-
-email: sherriff@gmail.com
-
-password: password
-
 Upon login, you'll initially be redirected to the dashboard, which displays the courses, skill groups and students that you follow.
 
 To go back to dashboard at any point, click the Hoosin Logo on the top left of the navigation bar.
